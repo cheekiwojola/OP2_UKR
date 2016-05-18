@@ -912,7 +912,7 @@
 
 		<supplies>
                 [spawn] \n
-                wpn_gauss \n
+                wpn_dark_gauss \n
                 ammo_gauss = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -1473,8 +1473,10 @@
 <actor_dialog>volna_zahar_start</actor_dialog>
 <actor_dialog>volna_zahar_done</actor_dialog>
 <actor_dialog>zahar_dopros</actor_dialog>
+<!--
 <actor_dialog>kill_predator_start</actor_dialog>
 <actor_dialog>kill_predator_done</actor_dialog>
+-->
 <actor_dialog>silent_hunt_start</actor_dialog>
 <actor_dialog>silent_hunt_done</actor_dialog>
 <!-- Akill end -->
@@ -2300,7 +2302,7 @@
 		<bio>gar_stalker_regular_bio</bio>
 		
 		<class>esc_nebo2</class>
-		<community>nebo</community> <terrain_sect>stalker_bandit_terrain</terrain_sect>
+		<community>nebo</community> <terrain_sect>stalker_nebo_terrain</terrain_sect>
 		
 		<rank>408</rank>
 		<reputation>32</reputation>
@@ -2331,7 +2333,7 @@
 		<bio>gar_stalker_regular_bio</bio>
 		
 		<class>esc_nebo_atak</class>
-		<community>nebo</community> <terrain_sect>stalker_bandit_terrain</terrain_sect>
+		<community>nebo</community> <terrain_sect>stalker_nebo_terrain</terrain_sect>
 		
 		<rank>108</rank>
 		<reputation>22</reputation>
@@ -2846,8 +2848,10 @@
 		<actor_dialog>new_gravikostum_done</actor_dialog>
 		<!-- Akill end -->
         <actor_dialog>repair</actor_dialog>
+<!--
 		<actor_dialog>xo_repair</actor_dialog>
 		<actor_dialog>xo_repair_done</actor_dialog>
+-->
 		<actor_dialog>maschalat_used_dialog</actor_dialog>
 
 #include "gameplay\character_criticals_4.xml"

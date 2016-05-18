@@ -30,7 +30,7 @@
             <actor_dialog>people_panic_1</actor_dialog>
 		<actor_dialog>escape_meceniy_start</actor_dialog>
 		<actor_dialog>akim_obmen</actor_dialog>
-          <actor_dialog>akim_obmen_fnsnip</actor_dialog>
+<!--          <actor_dialog>akim_obmen_fnsnip</actor_dialog> -->
           <actor_dialog>akim_zamok</actor_dialog>
           <actor_dialog>arhara_omlet_akim</actor_dialog>
           <actor_dialog>arhara_lekar_akim</actor_dialog>
@@ -99,8 +99,6 @@
 		  <actor_dialog>koloda_krest</actor_dialog>
 		  <actor_dialog>knife_akill_krest</actor_dialog>
 		  <actor_dialog>knife_akill_find</actor_dialog>
-		  <actor_dialog>krest_boar_start</actor_dialog>
-		  <actor_dialog>krest_boar_done</actor_dialog>
 		  <!-- Akill end -->
           <actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
 	</specific_character>
@@ -11413,7 +11411,7 @@
 
 		<supplies>
                 [spawn] \n
-                wpn_gauss \n
+                wpn_dark_gauss \n
                 ammo_gauss = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -11454,7 +11452,7 @@
 
 		<supplies>
                 [spawn] \n
-                wpn_gauss \n
+                wpn_dark_gauss \n
                 ammo_gauss = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -11488,7 +11486,7 @@
 
 		<supplies>
                 [spawn] \n
-                wpn_gauss \n
+                wpn_dark_gauss \n
                 ammo_gauss = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -13322,7 +13320,7 @@
 
     </supplies>
 		<start_dialog>semetskiy_vstrecha</start_dialog>
-         <actor_dialog>semetskiy_obmen</actor_dialog>
+<!--         <actor_dialog>semetskiy_obmen</actor_dialog> -->
          <actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
           
 #include "gameplay\character_criticals_4.xml"
