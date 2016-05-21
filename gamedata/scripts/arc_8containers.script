@@ -29,8 +29,16 @@ function get_inv_index(cont_id)
   return 0
 end
 
+function get_inv_container_id( cont_index )
+  return inv_containers[ cont_index ].id
+end
+
 function get_inv_container_arts(cont_index)
   return inv_containers[cont_index].arts
+end
+
+function get_inv_container_conds( cont_index )
+  return inv_containers[ cont_index ].conds
 end
 
 function register_container(cont_id, cont_section, cont_arts)
@@ -68,11 +76,12 @@ function register_container(cont_id, cont_section, cont_arts)
     end
   end
   
-  local cnt = {}
-  
-  cnt.id = cont_id
-  cnt.type = f
-  cnt.arts = {}
+  local cnt = {
+    [ "id"    ] = cont_id,
+    [ "type"  ] = f,
+    [ "arts"  ] = {},
+    [ "conds" ] = {},
+  }
   
   local arts = cont_arts
   if not arts then
@@ -84,25 +93,20 @@ function register_container(cont_id, cont_section, cont_arts)
     if (not arts) or (not arts[i]) or (arts[i]=="_") then
       cnt.arts[i] = 0
     else
-      local a = arc_arts.register_artefact(arts[i],1,true)
+      local a = arc_arts.register_artefact( arts[ i ], 1, cont_id )
       if a==0 then
         arc.warning("Невідомий артефакт "..tostring(arts[i]).." знаходиться в слоті #"..i.." контейнера #"..cont_id..". При відкритті контейнера артефакт будет видалений.")
       end
       cnt.arts[i] = a
-		--Skunk start
-		local ini = system_ini()
-        local art_section = arts[i]
-        local belt_rad = ini:r_float(art_section, "radiation_restore_speed")
-		local inv_rad
-        if ini:line_exist(art_section, "inventory_radiation") then
-          inv_rad = ini:r_float(art_section, "inventory_radiation")
-        else
-          inv_rad = math.max(belt_rad,0)
+      cnt.conds[ i ] = arts[ i + s ]
+
+        --Skunk start
+        local art_section = arts[ i ]
+        local belt_rad    = get_float( art_section, "radiation_restore_speed", 0 )
+        if belt_rad > 0.00031 then
+          arc_radiation.change_inv_arts_radiation( belt_rad - 0.00031 )
         end
-		if inv_rad >= 0.0003 then
-			arc_radiation.change_inv_arts_radiation(inv_rad-0.0003)
-		end
-		-- Skunk finish
+        -- Skunk finish
     end
   end
   
@@ -110,7 +114,7 @@ function register_container(cont_id, cont_section, cont_arts)
   table.insert(inv_containers, cnt)
   arc.info(list_inv_containers(),1)
   
-  if arts and (table.getn(arts)>s) then
+  if arts and table.getn(arts) > ( s * 2 ) then
     arc.warning("Кількість артефактів перевищує кількість слотів у контейнері #"..cont_id..". При відкритті контейнера лишні артефакти будет видалені.")
   end
   
@@ -125,21 +129,24 @@ function respawn_container(cont_index)
   end
   local a = {}
   
-  for i=1, cfg_containers[ic.type].slots do
+  local s = cfg_containers[ic.type].slots
+  for i = 1, s do
     if ic.arts[i]>0 then
-      a[i] = arc_arts.get_art_section(ic.arts[i])
+      a[ i     ] = arc_arts.get_art_section( ic.arts[ i ] )
+      a[ i + s ] = ( ic.conds[ i ] or "_" )
     else
-      a[i] = "_"
+      a[ i     ] = "_"
+      a[ i + s ] = "_"
     end
   end
   
-  local sobj = arc.give_item(cfg_containers[ic.type].section)
-  if not sobj then
-    return false
-  else
-    inv_containers[cont_index].id = sobj.id
-    set_container_arts(sobj.id, a)
-  end
+--  local sobj = arc.give_item(cfg_containers[ic.type].section)
+--  if not sobj then
+--    return false
+--  else
+--    inv_containers[cont_index].id = sobj.id
+    set_container_arts( inv_containers[ cont_index ].id, a )
+--  end
 end
 
 function remove_container(cont_index)
@@ -153,40 +160,35 @@ end
 --]]
 function on_lose_container(cont_id)
 	if menu_showed then return end
-
+	
     local n = get_inv_index(cont_id)
     
-    if alife():object(cont_id)==nil and not has_alife_info("biznes_remove_special_item") then
-      -- Контейнер использован. Показать меню
-      arc_ui_8container_menu.show_menu(get_inv_index(cont_id))
-    else
+--    if alife():object(cont_id)==nil and not has_alife_info("biznes_remove_special_item") then
+--      -- Контейнер использован. Показать меню
+--      arc_ui_8container_menu.show_menu(get_inv_index(cont_id))
+--    else
       -- Контейнер выброшен. Удалить контейнер и арты в нём из списка
       local arts = inv_containers[n].arts
       
       for i = 1, table.getn(arts) do
         if arts[i]>0 then
-          arc_arts.register_artefact(arc_arts.get_art_section(arts[i]), -1, true)
+          arc_arts.register_artefact(
+            arc_arts.get_art_section( arts[ i ] ), -1, cont_id
+          )
 
-		--Skunk start
-		local ini = system_ini()
-        local art_section = arc_arts.get_art_section(arts[i])
-        local belt_rad = ini:r_float(art_section, "radiation_restore_speed")
-		local inv_rad
-        if ini:line_exist(art_section, "inventory_radiation") then
-          inv_rad = ini:r_float(art_section, "inventory_radiation")
-        else
-          inv_rad = math.max(belt_rad,0)
-        end
-		if inv_rad >= 0.0003 then
-			arc_radiation.change_inv_arts_radiation(-(inv_rad-0.0003))
-		end
-		-- Skunk finish
+          --Skunk start
+          local art_section = arc_arts.get_art_section( arts[ i ] )
+          local belt_rad    = get_float( art_section, "radiation_restore_speed", 0 )
+          if belt_rad > 0.00031 then
+            arc_radiation.change_inv_arts_radiation( -( belt_rad - 0.00031 ) )
+          end
+          -- Skunk finish
 
 		  end
       end
       
       table.remove(inv_containers, n)
-    end
+--    end
 end
 
 function set_menu_showed(f)
@@ -207,11 +209,7 @@ function get_container_arts(cont_id)
     return nil
   end
   
-  local arts = {}
-  
-  for a in string.gmatch(cd_string, "[_%w]+") do
-    table.insert(arts, a)
-  end
+  local arts = split_comma_separated_list( cd_string )
   
   return arts
 end

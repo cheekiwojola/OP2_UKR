@@ -1,9 +1,10 @@
+-- -*- mode: lua; coding: windows-1251-dos -*-
 -- Модуль"Умный Ручной Телепорт"...Меченый(Стрелок)
 -- Особенности: 1) Далеко не со всех территорий можно телепортироватся ,2) Если нельзя телепортироватся с этой территории ,то придёт сообщение от Сахарова со списком территорий, откуда можно телепортироватся ,3)Пользоватся телепортом можно только когда ГГ уже выполнит некоторые сюжетные задания,4)Если нельзя пользоватся то также придёт сообщение..
 -- отрихтовано by sapsan
 local math_random = math.random
 
-local tabl_changers_by_level = {-- налетай! дополняй! нету уровня - нету телепорта туда!
+tabl_changers_by_level = {-- налетай! дополняй! нету уровня - нету телепорта туда!
 	["l01_escape"] = {
 		p_story_id = 99999,	-- STORY_ID нового level_changer (понадобится нам позже)
 		p_dest_lv = 6306,	-- level_vertex_id   - идентифицируют уровень, на который level_changer будет перебрасывать игрока 
@@ -134,7 +135,7 @@ end
 
 function hand_teleporter_use()
 	level.start_stop_menu(level.main_input_receiver(), true)
-	amk.spawn_item_in_inv("hand_teleporter")
+--	amk.spawn_item_in_inv("hand_teleporter")
 
 	if has_alife_info("no_teleport_near_heli_btr") then 
 		news_manager.send_tip(db.actor, "Телепортація з району скупчення ворожих сил неможлива з технічних причин. Для відновлення функціональності усуньте загрозу.", nil, "nano", 20000)
@@ -176,7 +177,8 @@ function hand_teleporter_use()
 	db.actor:give_info_portion("teleport_started")
 	db.actor:disable_info_portion("no_gravigun")
 	
-	amk.start_timer("hand_teleporter_jumpto", 3.0, random_level)
+--	amk.start_timer("hand_teleporter_jumpto", 3.0, random_level)
+        dsh.timeout( 3000, function() jumpTo( random_level ) end )
 end
 
 function jumpTo(random_level)

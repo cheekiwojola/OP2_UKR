@@ -235,11 +235,12 @@ function check_spawn()
 			elseif (news_main.isIsolatedLevel(lname) == false and news_main.isIsolatedLevel(sname) == true) then -- Tvбрались из-под земли.
 				news_main.on_connect()
 			end
-			if (amk_offline_alife) then
-				amk_offline_alife.update_trade()
-		end
 	end
   end
+
+	if (amk_offline_alife) then
+		amk_offline_alife.update_trade()
+	end
 
 	if lname=="l01_escape" and sname=="l04_darkvalley" then
 		local obj = alife():story_object(6002)
@@ -270,6 +271,7 @@ function check_spawn()
 	level.set_weather("amk_for_blow",true)
 	game.start_tutorial("restore_sun")
 
+--[[
 	if amk.load_variable("blowout",0)>0 and amk.load_variable("blowout",0)<4 then
 		local bt=blowout_type()
 		level.add_cam_effector("camera_effects\\earthquake.anm", 2002, true, "")
@@ -279,6 +281,7 @@ function check_spawn()
 			blowout_psy_sound("start")
 		end
 	end
+]]
 
 	if db.actor and not has_alife_info("game_over") then
 		local flame = db.actor:object("wpn_flame")
@@ -301,9 +304,10 @@ function restore_sun()
 	local lname = level.name()
 	local sname = amk.load_variable("level_on_save","")
   amk.save_variable("level_on_save",lname)
-	if amk.load_variable("blowout",0) == 0 then
+--	if amk.load_variable("blowout",0) == 0 then
 		level.set_weather(w,true)
-	end
+--	end
+--[=[
 	if amk.load_variable("blow_started", 0) == 0 then
 		start_blow_timer() amk.save_variable("blow_started", 1)
 	end
@@ -322,6 +326,7 @@ function restore_sun()
 			amk.start_timer("outfit_cond", 1, {outfit.id, math.min(math_ceil(outfit_cond * 100), 100)})
 		end
 	end
+--]=]
 end
   
 --[[	local lname = level.name()
@@ -350,7 +355,7 @@ function show_news()
 		news_main.on_news()
 	end
 
-	if not sleep_manager.is_sleep_active() then
+	if ui_mm_opt_main.GetOption( "new_sms" ) and not sleep_manager.is_sleep_active() then
 		-- вероятности поставлены по примерному количеству СМС в каждом файле
 		if math_random()>0.92 then
 --			if math_random()>0.875 then
@@ -431,6 +436,7 @@ function test_sleep_pp()
 	end
 end
 
+--[=[
 function check_sleep_item(obj)
 	local section = obj:section()
 	local stype=nil
@@ -451,9 +457,10 @@ function check_sleep_item(obj)
 		amk.start_timer("sleep_"..stype,0.1,obj:id())
 	end
 end
+--]=]
 
 function test_for_need_sleep_nrg(oid)
-	if alife():object(oid)==nil then
+--	if alife():object(oid)==nil then
 		local n=amk.load_variable("gg_need_sleep_nrg",0)
 		if n<3 then
 			amk.save_variable("gg_need_sleep_nrg",n+1)
@@ -462,7 +469,7 @@ function test_for_need_sleep_nrg(oid)
 		end  
 		amk.g_start_timer("block_sleep_menu",0,1,0)
 		amk.save_variable("block_sleep_menu",1)
-	end
+--	end
 end
 --[[
 function test_for_need_sleep_med(oid)
@@ -473,33 +480,48 @@ function test_for_need_sleep_med(oid)
 end
 ]]--
 function test_for_need_sleep_matras(oid)
-	if alife():object(oid)==nil then
+--	if alife():object(oid)==nil then
+		if
+		  db.actor:has_info( "horror_time_begin" )
+		  and
+		  db.actor:dont_has_info( "horror_fail" )
+		then
+		  if not meceniy_utils.check_for_horror_time() then
+		    db.actor:disable_info_portion( "horror_time_begin" )
+		  end
+		end
 		local enemy=false
 		local obj
 		local level_object_by_id = level.object_by_id
 		local actor = db.actor
 		local actorPos = actor:position()
+		local friends_count = 0
 		for npcId, npc in pairs(db.storage) do
 			obj = level_object_by_id(npcId)
-			if obj then
-				if (( IAmAStalker[obj:clsid()] and amk.get_npc_relation(obj,actor)=="enemy" ) or IAmAMonster[obj:clsid()])
-					and obj:position():distance_to(actorPos) < 40 and obj:see(actor) then
+			if obj and obj:is_custom_monster() and obj:alive() then
+				local is_stalker = IsStalker(obj)
+				local dist = obj:position():distance_to(actorPos)
+				local is_enemy_to_actor = ogse.get_npc_relation( obj, db.actor ) == "enemy"
+				if ( ( is_stalker or IAmAMonster[obj:clsid()] ) and is_enemy_to_actor )
+					and ( dist < 20 or obj:see(actor) ) then
 					enemy=true
 					break
+				elseif is_stalker and dist < 40 then
+					friends_count = friends_count + 1
 				end
 			end
 		end
 		if enemy==true then
-			amk.send_tip(game.translate_string("not_need_sleep_enemy"),nil,nil,5)
+			ogse.autohiding_msg(game.translate_string("not_need_sleep_enemy"), 1500)
 		else
 			if amk.load_variable("blowout",-1)>-1 and amk.load_variable("blowout",-1)<5 then
-				amk.send_tip(game.translate_string("blowout_not_sleep"),nil,nil,5)
+				ogse.autohiding_msg(game.translate_string("blowout_not_sleep"), 1500)
 			else
 				if db.actor:has_info("horror_time_begin") and db.actor:dont_has_info("horror_fail") then
-					amk.send_tip(game.translate_string("not_need_sleep_in_hell"),nil,nil,5)
+					ogse.autohiding_msg(game.translate_string("not_need_sleep_in_hell"), 1500)
 				else
 					if amk.load_variable("block_sleep_menu",0)==0 then
-						if amk.load_variable("gg_need_sleep",0)>0 or
+						if amk.load_variable("gg_need_sleep",0) > 10 or
 							(has_alife_info("snp_shadows_start") and not has_alife_info("snp_shadows_done")) or
 							db.debug
 						then
@@ -508,19 +530,30 @@ function test_for_need_sleep_matras(oid)
 							if snd then 
 								snd:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 2.0)
 							end
+--[[
 							local spwn=ui_cheat.cheat(get_hud())
 							level.start_stop_menu(spwn,true)
+]]
+                                                        -- закрываем инвентарь
+                                                        local wnd = level.main_input_receiver()
+                                                        if wnd then
+                                                          wnd:GetHolder():start_stop_menu(wnd, true)
+                                                        end
+                                                        -- открываем диалог сна
+                                                        level.start_stop_menu(ui_sleep.sleep(),true)
+							-- запоминаем, делать ли подлянку
+							ogse_sleep_mgr.actor_need_surprise = (friends_count == 0 and math.random() < 0.8)
 						else
-							amk.send_tip(game.translate_string("not_need_sleep"),nil,nil,5)
+							ogse.autohiding_msg(game.translate_string("not_need_sleep"), 1500)
 						end
 					else
-						amk.send_tip(game.translate_string("not_need_sleep_nrg"),nil,nil,5)
+						ogse.autohiding_msg(game.translate_string("not_need_sleep_nrg"), 1500)
 					end
 				end
 			end
 		 end
-	    amk.spawn_item_in_inv("matras")
-	end
+--	    amk.spawn_item_in_inv("matras")
+--	end
 end
 
 function test_for_need_sleep_tr_item(oid)
@@ -794,7 +827,7 @@ end
 -- vremya = {дни, часы, минуты} - время варки/мутации
 -- remove_anomaly - удалить ли аномалию (можно комбинировать вместе с варкой/мутацией)
 -- not_for_mutator - рецепт никогда не попадёт в трансмутатор
-local anom_recept_komp = {
+anom_recept_komp = {
 	-- умолчание, если нет даннvх ближе к рецепту
 	default = {
 		cel = {},
@@ -1809,25 +1842,27 @@ function af_select_result(v_udachi, v_virogd, virogd, cel, komp)
 	end
 end
 
--- запускаем трансофрмациі 
--- результатv могут бvть многочисленнv (несколько целей, полное отторжение компонентов, несколько вvрождений)
-function as_start_universal_transform_timer(komp, result, udacha, pos, vremya, gv, lv, info_portion, remove_anomaly, remove_anomaly_id)
-	local t={} -- сохраняемvе даннvе
-	t.result = result -- можно сохранять сразу таблицv
-	t.udacha = udacha
-	t.pos = {}
-		t.pos.x = pos.x
-		t.pos.y = pos.y
-		t.pos.z = pos.z
-	t.gv=gv
-	t.lv=lv
-	t.info_portion = info_portion
-	t.komp = komp -- можно сохранять сразу таблицv
-	t.remove_anomaly = remove_anomaly
-	t.remove_anomaly_id = remove_anomaly_id
-	--get_console():execute("load ~#I#:"..string.format(" g_start_timer: "..vremya[1].." "..vremya[2].." "..vremya[3].." "..amk.pack_array_to_string(t)))
-	amk.g_start_timer("af_transform_universal", vremya[1], vremya[2], vremya[3], t)
+
+-- запускаем трансофрмациі результатv могут бvть многочисленнv
+-- (несколько целей, полное отторжение компонентов, несколько
+-- вvрождений)
+function as_start_universal_transform_timer( komp, result, udacha, pos, vremya, gv, lv, info_portion, remove_anomaly, remove_anomaly_id )
+  local t = { } -- сохраняемvе даннvе
+  t.result = result -- можно сохранять сразу таблицv
+  t.udacha = udacha
+  t.pos    = {}
+  t.pos.x  = pos.x
+  t.pos.y  = pos.y
+  t.pos.z  = pos.z
+  t.gv     = gv
+  t.lv     = lv
+  t.info_portion = info_portion
+  t.komp   = komp -- можно сохранять сразу таблицv
+  t.remove_anomaly    = remove_anomaly
+  t.remove_anomaly_id = remove_anomaly_id
+  dsh.begin_af_transform( vremya[ 1 ], vremya[ 2 ], vremya[ 3 ], t )
 end
+
 
 -- старая фунция
 function af_start_transform(v1,v2,af_from,af_target)
@@ -1857,72 +1892,69 @@ function af_start_transform_timer(af,pos,delay_d,delay_h,delay_m,af_sect)
 	amk.g_start_timer("af_transform",delay_d,delay_h,delay_m,t)
 end
 
+
 -- завершаем варку/мутациі
 -- может бvть много результатов
-function af_transform_universal_end(params)
-	--get_console():execute("load ~#I#:"..string.format(" af_transform_universal_end "))
-	-- если есть результатv
-	local count = 0
-	for k, v in pairs(params.result) do
-		count = count + 1
-	end
-	if count > 0 then
-		local anom_pos = vector():set(params.pos.x, params.pos.y, params.pos.z)
-		if db.actor:position():distance_to(anom_pos) < 15 then
-			level.add_pp_effector("teleport.ppe", 1524, false)
-		end
-		-- формируем строку с названиями компонентов
-		local from_komp = ""
-		for k,v in pairs(params.komp) do
-			if k then
-				from_komp = from_komp..game.translate_string(amk.get_inv_name(k))..", "
-			end
-		end
-		-- отсекаем ", " в хвосте
-		from_komp = string_sub(from_komp, 1, -2)
-		
-		-- спавним результат(v)
-		for k,v in pairs(params.result) do
-			local obj
-			-- спавн поднят на 10 метров, чтоб победить проваливание под текстуры
-			obj = amk.spawn_item(k, vector():set(params.pos.x,params.pos.y+10,params.pos.z), params.gv, params.lv) 
-			amk.add_spot_on_map(obj.id, "red_location", game.translate_string("trans_finished_title").." з %c[255,255,0,0]"..from_komp)
-			if params.udacha and string.find(k, "^af_") then
-				archievements.acv_count_event("acv_art", 100, "Зварювальник")
-			end
-		end
-	
-		amk.send_tip(game.translate_string("trans_finished_title").." з %c[255,255,0,0]"..from_komp)
-	end
-	
-	-- даїм инфопорциі, если есть
-	if params.info_portion and db.actor:dont_has_info(params.info_portion) then
-		--get_console():execute("load ~#I#: params.info_portion: "..params.info_portion)
-		db.actor:give_info_portion(params.info_portion)
-		--[[if db.actor:has_info(params.info_portion) then
-			get_console():execute("load ~#I#: params.info_portion: "..params.info_portion.." і+TL++=")
-		end]]
-	end
-	
-	-- удаляем аномалии, если нужно и она не в исклічениях
-	-- код взят из amk_anoms.turn_off_all()
-	if params.remove_anomaly then
-		local sobj = alife():object(params.remove_anomaly_id)
-		if sobj and game_graph():valid_vertex_id(sobj.m_game_vertex_id) then
-			local map = alife():level_name(game_graph():vertex(sobj.m_game_vertex_id):level_id())
-			local obj_name=sobj:name()
-			if not amk_anoms.check_exclusion(sobj, map) then 
-				local status = amk_anoms.get_anomaly_status(sobj)
-				if status=="" or status == "on" then
-					amk_anoms.set_anomaly_status(sobj, "del")
-					alife():release(sobj, true)
-				end
-			end
-		end
-	end
---[[	get_console():execute("load ~#I#:"..string.format(" варка закончена "))
-	get_console():execute("flush")]]
+function af_transform_universal_end( params )
+  -- если есть результатv
+  if table.getn( params.result ) > 0 then
+    local anom_pos = vector():set( params.pos.x, params.pos.y, params.pos.z )
+    if
+      level.name() == params.lname
+      and db.actor:position():distance_to( anom_pos ) < 15
+    then
+      level.add_pp_effector( "teleport.ppe", 1524, false )
+    end
+    -- формируем строку с названиями компонентов
+    local from_komp = {}
+    for _, k in ipairs( params.komp ) do
+      table.insert( from_komp, game.translate_string( amk.get_inv_name( k ) ) )
+    end
+    -- спавним результат(v)
+    for _, k in ipairs( params.result ) do
+      -- спавн поднят на 10 метров, чтоб победить проваливание под текстуры
+      local obj = amk.spawn_item(
+        k,
+        vector():set( params.pos.x, params.pos.y + 10, params.pos.z ),
+        params.gv, params.lv
+      )
+      amk.add_spot_on_map(
+        obj.id, "red_location",
+        game.translate_string( "trans_finished_title" )
+          .. " из %c[255,255,0,0]" .. table.concat( from_komp, ", " )
+      )
+      if params.udacha and string.find( k, "^af_" ) then
+        archievements.acv_count_event( "acv_art", 100, "Сварщик" )
+      end
+    end
+    amk.send_tip(
+      game.translate_string( "trans_finished_title" )
+        .. " из %c[255,255,0,0]" .. table.concat( from_komp, ", " )
+    )
+  end
+
+  -- даїм инфопорциі, если есть
+  if params.info_portion and db.actor:dont_has_info( params.info_portion ) then
+    db.actor:give_info_portion( params.info_portion )
+  end
+
+  -- удаляем аномалии, если нужно и она не в исклічениях
+  -- код взят из amk_anoms.turn_off_all()
+  if params.remove_anomaly then
+    local sobj = alife():object( params.remove_anomaly_id )
+    if sobj and game_graph():valid_vertex_id( sobj.m_game_vertex_id ) then
+      local map = object_level_name( sobj )
+      if not amk_anoms.check_exclusion( sobj, map ) then
+        local status = amk_anoms.get_anomaly_status( sobj )
+        if status == "" or status == "on" then
+          amk_anoms.set_anomaly_status( sobj, "del" )
+          alife():release( sobj, true )
+        end
+      end
+    end
+  end
 end
+
 
 -- старая функция
 function af_transform_end(params)
@@ -2264,6 +2296,9 @@ function blowout_psy_sound(action)
 end
 
 function Run_Blowout_pp()
+end
+
+function Run_Blowout_pp_old()
 if game_options.run_blowout_pp == 1 then
 		local bt=blowout_type()
 		if bt==2 then start_blow_timer() return end
@@ -2283,12 +2318,14 @@ if game_options.run_blowout_pp == 1 then
 end
 
 function start_blow_timer()
+--[[
 local basis = game_options.blow_time_basis
 local shift = game_options.blow_time_shift
 --local resuls = basis + (math_random()*shift) - (shift/2)
 local resuls = basis+math_random(-shift, shift)
 amk.g_start_timer("blow_shift", 0, 0, resuls)
 if (news_main and news_main.next_blow) then news_main.next_blow(resuls) end
+]]
 end
 
 function Blowout_pp(phase)
@@ -2705,7 +2742,7 @@ local blood_enable = 1 -- эффект ранения
 local bleed_enable = 1 -- эффект плохого самочувствия
 local otladka = 0 -- вvвод в лог
 --------------------------------------------------------------------------------
-local suitHudName_wotType = {
+suitHudName_wotType = {
 	["bandit_gaz_outfit_"]				= "hud_gaz",
 	["dolg_gaz_outfit_"]				= "hud_gaz",
 	["monolit_gaz_outfit_"]				= "hud_gaz",
@@ -2734,8 +2771,8 @@ local suitHudName_wotType = {
 	["militaryspec_outfit"]				= "hud_mil",
 	["outfit_specnaz_"]					= "hud_mil",
 	["specops_outfit"]					= "hud_mil",
-	["nano_outfit"]						= "hud_nano",
-	["nano_suit"]						= "hud_nano",
+	["nano_outfit"]						= "hud_sci", --"hud_nano",
+	["nano_suit"]						= "hud_sci", --"hud_nano",
 	["broken_exoskeleton"]				= "hud_exo",
 	["dolg_black_exoskeleton"]			= "hud_exo",
 	["exo_bandit_outfit"]				= "hud_exo",
@@ -2787,79 +2824,93 @@ local suit_condition
 local wotsuittype = ""
 local smoktime = 0
 function check_hud()
-if monnoroch_options.suithud_enable == 0 then return end   -- by Monnoroch
-if amk.load_variable("option_hud",2)~=2 then return end    -- by Monnoroch
-local gsmktime = time_global()
-if smoktime == 0 then smoktime = time_global() + 4000 end
-if db.actor ~= nil then
- local csuithud = db.actor:get_current_outfit()
- local suithudtype, isitbino, suithudname
- if csuithud ~= nil then suithudname = csuithud:section() end
- if suithudname ~= nil then
-  suit_condition = ""
-  if csuithud:condition() > 0.87 then
-	suit_condition = "blue"
-  elseif csuithud:condition() > 0.69 then
-	suit_condition = "green"
-  elseif csuithud:condition() > 0.60 then
-	suit_condition = "yellow"
-  elseif csuithud:condition() > 0.40 then
-	suit_condition = "red"
-  elseif csuithud:condition() > 0.25 then
-	suit_condition = "red2"
-  else
-	suit_condition = "red3"
+  if monnoroch_options.suithud_enable == 0 then return end   -- by Monnoroch
+  if amk.load_variable( "option_hud", 2 ) < 1 then return end    -- by Monnoroch
+  local gsmktime = time_global()
+  if smoktime == 0 then smoktime = time_global() + 4000 end
+  if db.actor then
+    local csuithud = db.actor:get_current_outfit()
+    local suithudtype, isitbino, suithudname
+    if csuithud ~= nil then suithudname = csuithud:section() end
+    local dynamic_hud_enable = false
+    if suithudname ~= nil then
+      suit_condition = ""
+      if     csuithud:condition() > 0.87 then
+        suit_condition = "blue"
+      elseif csuithud:condition() > 0.69 then
+        suit_condition = "green"
+      elseif csuithud:condition() > 0.60 then
+        suit_condition = "yellow"
+      elseif csuithud:condition() > 0.40 then
+        suit_condition = "red"
+      elseif csuithud:condition() > 0.25 then
+        suit_condition = "red2"
+      else
+        suit_condition = "red3"
+      end
+      if otladka ~= 0 then
+        log1( "load ~~~ suithudname: " .. suithudname )
+      end
+      dynamic_hud_enable = get_bool( suithudname, "dynamic_hud_enable", false )
+      if dynamic_hud_enable then
+        wotsuittype = get_string( suithudname, "dynamic_hud_type", nil )
+        if wotsuittype then suithudtype = wotsuittype .. "_" .. suit_condition end
+      else
+        for k,v in pairs( suitHudName_wotType ) do
+          if string_find( suithudname, k ) then
+            suithudtype = v .. "_" .. suit_condition
+            wotsuittype = v
+            if otladka ~= 0 then
+              log1( "load ~~~ found suithudname: " .. suithudname .. " key: " .. k .. " type: " .. v )
+            end
+            break
+          end
+        end
+      end
+    else
+      suithudtype = nil
+    end
+--[[
+    -- by Monnoroch
+    if amk.load_variable( "option_hud", 2 ) ~= 2 then   
+      suithudtype = nil                              
+    end
+]]
+    if not db.actor:alive() then suithudtype = nil end
+    setmysuithud( dynamic_hud_enable, suithudtype )
   end
-	if otladka ~= 0 then
-		get_console():execute("load ~~~ suithudname: "..suithudname)
-	end
-	for k,v in pairs(suitHudName_wotType) do
-		if string_find(suithudname, k) then
-			suithudtype = v.."_"..suit_condition
-			wotsuittype = v
-			if otladka ~= 0 then
-				get_console():execute("load ~~~ found suithudname: "..suithudname.." key: "..k.." type: "..v)
-			end
-			break
-		end
-	end
- else
-	suithudtype = nil
- end
--- by Monnoroch
-if amk.load_variable("option_hud",2)~=2 then   
-suithudtype = nil                              
-end                                            
- if not db.actor:alive() then suithudtype = nil end
-  setmysuithud(suithudtype)
-end
 end
 
 local suitfirstrun = "yes"
-function setmysuithud(hudtype)
-  if hudtype == nil then
-	local wchud = get_hud():GetCustomStatic(mycurrent_suithud)
-	if wchud ~= nil then get_hud():RemoveCustomStatic(mycurrent_suithud) end
-	mycurrent_suithud = nil
-	suitfirstrun = "yes"
+function setmysuithud( dynamic_hud_enable, hudtype )
+  if not hudtype and not dynamic_hud_enable then
+    local wchud = get_hud():GetCustomStatic( mycurrent_suithud )
+    if wchud then
+      get_hud():RemoveCustomStatic( mycurrent_suithud )
+      ogse_dynamic_hud.switch_shader_effects( "off" )
+    end
+    mycurrent_suithud = nil
+    suitfirstrun = "yes"
     return
   end
   if hudtype ~= mycurrent_suithud then
     if mycurrent_suithud then
-      get_hud():RemoveCustomStatic(mycurrent_suithud)
+      get_hud():RemoveCustomStatic( mycurrent_suithud )
     end
     if hudtype then
-      get_hud():AddCustomStatic(hudtype)
-           biodetector.biodetectorRemove() --  alen-fantom
-	  if string_find(hudtype, wotsuittype) then
-		if suitfirstrun == "no" and suit_condition ~= "green" and suit_condition ~= "blue" then
-			local snd_obj = sound_object("material\\glass\\glass_fall03hl")
-			snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 9.0)
-		end
-		if suitfirstrun == "yes" then suitfirstrun = "no" end
+      get_hud():AddCustomStatic( hudtype )
+      ogse_signals.get_mgr():call( "on_hud_show" )
+      biodetector.biodetectorRemove() --  alen-fantom
+      if string_find( hudtype, wotsuittype ) then
+        if suitfirstrun == "no" and suit_condition ~= "green" and suit_condition ~= "blue" then
+          local snd_obj = sound_object( "material\\glass\\glass_fall03hl" )
+          snd_obj:play_no_feedback( db.actor, sound_object.s2d, 0, vector(), 9.0 )
+        end
+        if suitfirstrun == "yes" then suitfirstrun = "no" end
       end
     end
     mycurrent_suithud = hudtype
+    ogse_dynamic_hud.switch_shader_effects( "on" )
   end
 end
 
@@ -2902,6 +2953,7 @@ if db.actor ~= nil and cbloodtimed > bloodtimeb and isbleeding == "yes" and radw
   m_blood={}
   countblood = countblood + 1
   get_hud():AddCustomStatic("hud_blood"..countblood)
+  ogse_signals.get_mgr():call( "on_hud_show" )
   m_blood[countblood]=get_hud():GetCustomStatic("hud_blood"..countblood):wnd()
   local chudblood = "hud_blood"..countblood
   if countblood == 4 then
@@ -2959,6 +3011,7 @@ end
 
 function init_blurs()
 	if monnoroch_options.blurs_enable == 0 then return end   -- by Monnoroch
+	if amk.load_variable( "option_hud", 2 ) < 2 then return end
 	if mycurrent_suithud ~= nil and not string_find(mycurrent_suithud,"_red3") and not string_find(mycurrent_suithud,"hud_sci_") then
 		local zoom=67.5/device().fov
 		zoom=(zoom-1)*1.5+1
@@ -2987,6 +3040,7 @@ function set_blurs(enabled,rect)
 			get_hud():AddCustomStatic("hud_blur"..i)
 			blurs[i]=get_hud():GetCustomStatic("hud_blur"..i):wnd()
 			blurs[i]:SetWidth(0)
+                        ogse_signals.get_mgr():call( "on_hud_show" )
 		end
 	end
 	if not enabled then
@@ -3255,101 +3309,105 @@ function switch_monster_offline(obj)
 	se_monster.need_be_online[obj.id]=false
 end
 
-function respawned(obj,respawner)
-	if obj and IAmAMonster[obj:clsid()] then
-		local sini = respawner:spawn_ini()
-		if sini:line_exist ("respawn", "creature_binded_logic") == true then
-			local cfg_name = utils.cfg_get_string(sini, "respawn", "creature_binded_logic", false, false, false, "")
-			local t = amk.read_monster_params(obj)
-			t.custom = "[logic]\ncfg = scripts\\amk\\"..cfg_name..".ltx"
-			amk.write_monster_params(t, obj)
-		end
-	elseif obj and IAmAStalker[obj:clsid()] then
-		local sini = respawner:spawn_ini()
-		if sini:line_exist ("respawn", "creature_binded_logic") == true then
-			local cfg_name = utils.cfg_get_string(sini, "respawn", "creature_binded_logic", false, false, false, "")
-			local t = amk.read_stalker_params(obj)
-			t.custom = "[logic]\ncfg = scripts\\amk\\"..cfg_name..".ltx"
-			amk.write_stalker_params(t, obj)
-		end
-	end	
+
+function respawned( obj, respawner )
+  if obj and IAmAMonster[ obj:clsid() ] then
+    local sini = respawner:spawn_ini()
+    if sini:line_exist( "respawn", "creature_binded_logic" ) then
+      local t = amk.read_monster_params( obj )
+      if ( not t.custom ) or string.len( t.custom ) == 0 then
+        local cfg_name = utils.cfg_get_string(
+          sini, "respawn", "creature_binded_logic", false, false, false, ""
+        )
+        t.custom = "[logic]\ncfg = scripts\\amk\\" .. cfg_name .. ".ltx"
+        amk.write_monster_params( t, obj )
+      end
+    end
+  elseif obj and IAmAStalker[ obj:clsid() ] then
+    local sini = respawner:spawn_ini()
+    if sini:line_exist( "respawn", "creature_binded_logic" ) then
+      local t = amk.read_stalker_params( obj )
+      if ( not t.custom ) or string.len( t.custom ) == 0 then
+        local cfg_name = utils.cfg_get_string(
+          sini, "respawn", "creature_binded_logic", false, false, false, ""
+        )
+        t.custom = "[logic]\ncfg = scripts\\amk\\" .. cfg_name .. ".ltx"
+        amk.write_stalker_params( t, obj )
+      end
+    end
+  end
 end
 
-local respawners={}
 
-function spawn_unspawned_respawners()
+function spawn_unspawned_respawners( respawn )
+  local respawners = {}
+  for a = 1, 65534 do
+    local obj = alife():object( a )
+    if obj then
+      local sini = obj:spawn_ini()
+      if sini:section_exist( "respawn" ) then
+        local amk_name = get_string( "respawn", "amk_name", nil, sini )
+        if amk_name then respawners[ amk_name ] = obj end
+      end
+    end
+  end
 
-	for a=1,65534 do
-		local obj = alife():object(a)
-		if obj then
-			local oini = obj:spawn_ini()
-			if oini:line_exist ("respawn", "amk_name") == true then
-				local amk_name = utils.cfg_get_string(oini, "respawn", "amk_name", false, false, false, false)
-				if amk_name then respawners[amk_name]=true end
-			end
-		end
-	end
+  local root = "amk_respawns"
+  local dv   = {}
+  if sys_ini:section_exist( root .. ".default_values" ) then
+    for id, value in pairs(
+      get_section_keys_and_values( root .. ".default_values" )
+    ) do
+        dv[ id ] = value
+    end
+  end
 
-	local iniFileName = "scripts\\amk\\amk_respawns.ltx"
-	local sini = ini_file(iniFileName)
-	
-	local dv={}
-	if iniLineSectionExist("default_values", iniFileName) then
-		local result, id, value = nil, nil, nil
-		for a=0,iniLinesCount("default_values", iniFileName)-1 do
-			result, id, value = getIniLine("default_values",a,"","", iniFileName)
-			if id~=nil and amk.trim(id)~="" and amk.trim(id)~=nil then
-				dv[amk.trim(id)]=amk.trim(value)
-			end
-		end
-	end
-
-	if iniLineSectionExist("amk_respawns", iniFileName) then
-		local tmp={}
-		local result, id, value = nil, nil, nil
-		for a=0,iniLinesCount("amk_respawns", iniFileName)-1 do
-			result, id, value = getIniLine("amk_respawns",a,"","", iniFileName)
-			if id~=nil and amk.trim(id)~="" and amk.trim(id)~=nil then
-				table.insert(tmp, amk.trim(id))
-			end
-		end
-		
-		for k,v in pairs(tmp) do
-			--local flag = utils.cfg_get_bool(sini, "amk_respawns", v, true, false, false)
-			local flag = getIniValueBool("amk_respawns", v, false, iniFileName)
-			if not respawners[v] and flag==true then
-				--local t = amk.parse_ini_section_to_array(sini, v)
-				local t = amk.parse_ini_section_to_array_new(iniFileName, v)
-				local xyzlg = amk.str_explode(",",t.xyzlg,true)
-				local pos = vector():set(tonumber(xyzlg[1]),tonumber(xyzlg[2]),tonumber(xyzlg[3]))
-				local respawner = amk.spawn_item("respawn",pos,tonumber(xyzlg[5]),tonumber(xyzlg[4]))
-				local tbl = amk.get_spawner_data(respawner)
-				t.xyzlg = nil
-				t.amk_name = v
-
-				for kkk,vvv in pairs(dv) do
-					if t[kkk]==nil then
-						t[kkk]=vvv
-					end
-				end
-
-				tbl.custom = amk.gen_custom_data({respawn=t})
-				--amk.mylog(tbl.custom)
-				amk.set_spawner_data(tbl, respawner)
-				se_respawn.reinit_spawner_params(respawner:name())
-				--amk.add_spot_on_map(respawner.id,"red_location", v)
-				--amk.mylog("spawned respawn "..respawner.id)
-			end
-			if flag==false then
-				local o = se_respawn.get_respawner_by_name(v)
-				if o then
-					--amk.mylog("released respawn "..o.id)
-					alife():release(o)
-				end
-			end
-		end
-	end
+  if sys_ini:section_exist( root ) then
+    local tmp = get_section_keys( root )
+    for _, v in ipairs( tmp ) do
+      local flag = get_bool( "amk_respawns", v, false )
+      if respawn then flag = false end
+      local sect = root .. "." .. v
+      if not respawners[ v ] and flag then
+        local t     = get_section_keys_and_values( sect )
+        local xyzlg = amk.str_explode( ",", t.xyzlg, true )
+        local pos   = vector():set(
+          tonumber( xyzlg[ 1 ] ), tonumber( xyzlg[ 2 ] ), tonumber( xyzlg[ 3 ] )
+        )
+        local respawner = amk.spawn_item(
+          "respawn", pos, tonumber( xyzlg[ 5 ] ), tonumber( xyzlg[ 4 ] )
+        )
+        local tbl = amk.get_spawner_data( respawner )
+        t.xyzlg    = nil
+        t.amk_name = v
+        for kkk, vvv in pairs( dv ) do
+          if not t[ kkk ] then
+            t[ kkk ] = vvv
+          end
+        end
+        tbl.custom = amk.gen_custom_data({ respawn = t })
+        amk.set_spawner_data( tbl, respawner )
+        se_respawn.reinit_spawner_params( respawner:name() )
+      end
+      if respawners[ v ] and flag then
+        local new_ver = get_float( sect, "dsh_version", 0 )
+        local obj     = respawners[ v ]
+        local cur_ver = get_u32(
+          "respawn", "dsh_version", 0, obj:spawn_ini()
+        )
+        if new_ver > cur_ver then flag = false end
+      end
+      if not flag then
+        local o = se_respawn.get_respawner_by_name( v )
+        if o then
+          o:dsh_cleanup_spawned_obj()
+          se_respawn.release_respawner( o )
+        end
+      end
+    end
+  end
 end
+
 
 --'*******************************************************************************
 --'   **   **   **   **   **    **   **   **   **          OTHER        **   **   **   **   **    **   **   **   **   
@@ -3409,6 +3467,7 @@ function check_armor()
 	  end
 	end
 	
+--[[
 	if not armor then
 		last_armor_id=0
 		return
@@ -3423,6 +3482,7 @@ function check_armor()
 	else
 		last_condition=armor:condition()
 	end
+]]
 end
 
 --[[
@@ -3452,28 +3512,6 @@ btrs_friends={}
 function build_btrs_table(obj)
 	if obj and (IAmAStalker[obj:clsid()] and obj:character_community()=="military" and obj:alive()) or obj:section()=="vehicle_btr" then
 			btrs_friends[obj:id()] = obj:section()
-	end
-end
-
-function firebated(obj, amount, local_direction, who, bone_index)
-	if bone_index>0 and who and IAmAStalker[who:clsid()] then --false для отклічения
-		local script
-		if obj and IAmAMonster[obj:clsid()] then 
-			script=bind_monster
-		elseif obj and IAmAStalker[obj:clsid()] then
-			script=xr_motivator
-		end
-		if script then
-			local weapon = who:active_item()
-			if not weapon or weapon:section()~="wpn_flame" then return end
-			if string_find(obj:section(), "zomb") and obj.health<0.2 then obj:kill(obj) end
-			script.play_particle(obj,
-			{
-				obj=obj,
-				particle="amk\\flame",
-				bone="bip01_spine1"
-			})
-		end
 	end
 end
 

@@ -36,7 +36,7 @@ local bombs = {
 	["func"] = bombOut
 }
 
-local timeBombs = {
+timeBombs = {
 	["sect"] = {
 		["bomba_timer_n_10"] = {
 			["activated"] = "bomba_timer_n_10_activated",
@@ -55,7 +55,7 @@ local timeBombs = {
 			["base"] = "bomba_timer_b_30_base"
 		}
 	},
-	["func"] = timeBombOut
+--  ["func"] = timeBombOut
 }
 
 local timeBombsBase = {
@@ -88,7 +88,7 @@ local timeBombsActivated = {
 	}
 }
 
-local mines = {
+mines = {
 	["count"] = 0,
 	["sect"] = {
 		["bomba_mina_n"] = {
@@ -104,7 +104,7 @@ local mines = {
 			["ids"] = {}
 		}
 	},
-	["func"] = mineOut
+--      ["func"] = mineOut
 }
 
 local detonators = {
@@ -126,7 +126,7 @@ local detonators = {
 			["activated"] = false
 		}
 	},
-	["func"] = detonatorOut
+--      ["func"] = detonatorOut
 }
 
 local ignored_items = {
@@ -141,7 +141,7 @@ local ignored_items = {
 	["wpn_binoc"]		= true,
 	["bolt"]			= true,
 	["yad"]				= true,
-	["player"]			= true
+  ["player"]       = true,
 }
 
 local transferredBombs = {}
@@ -877,16 +877,9 @@ function explodeBisideExplosives(tbl)
 end
 
 function hitExplosive(ob)
-	--get_console():execute("load ~~~ function hitExplosive(ob)")
-	if ob then
+  if ob and ob:is_explosive() then
 		--amk.send_tip("Наносим повреждение взрывчатке: id "..ob:id()..", name "..ob:name())
-	local h = hit()
-	h.power = 2000
-	h.impulse = 100
-	h.draftsman = ob
-	h.direction = vector():set(0,0,0)
-	h.type = hit.explosion
-	ob:hit(h)
+    ob:explode()
 end
 end
 
@@ -957,7 +950,7 @@ end
 function update(delta)
 	if mines["count"] > 0 then
 		local npcOnline = db.storage
-		local npcOffline = amk_offline_alife.off_npcs
+    local npcOffline = {}
 		if npcOnline and npcOffline then
 			local npcObj, mineObj
 			local level_object_by_id = level.object_by_id

@@ -148,7 +148,7 @@ function start_timer(name, delay, parameters)
 	local timers = load_table("timers")
 	--dump_table(timers)
 	
-	table.insert(timers, {name, math_floor(game_milliseconds() + delay * 1000 * system_ini():r_float("alife","time_factor")), parameters})
+	table.insert(timers, {name, math_floor(game_milliseconds() + delay * 1000 * sys_ini:r_float("alife","time_factor")), parameters})
 
 	-- сортируем для оптимизации дальнейшего поиска по таймерам
 	-- таймеры с меньшим временем будут в конце таблицы
@@ -174,7 +174,7 @@ function start_timer(name, delay, parameters)
     end
   end
   save_variable("xt"..a, name)
-  save_variable("xd"..a, time+delay*1000*system_ini():r_float("alife","time_factor"))
+  save_variable("xd"..a, time+delay*1000*sys_ini:r_float("alife","time_factor"))
   save_variable("xp"..a, action)]]
 
   return true
@@ -339,7 +339,7 @@ function convert_timers()
 	local tmp
 	local name,delay,params
 	local g_milliseconds = game_milliseconds()
-	--local time_factor = system_ini():r_float("alife","time_factor")
+	--local time_factor = sys_ini:r_float("alife","time_factor")
 	local time_factor = getIniValueFloat("alife","time_factor",5,nil)
 	local timers_to_unpack = {
 		["sleep_fake_wpn"]					= true,
@@ -576,23 +576,12 @@ local func_by_string = {}
 			nightvision.pnv_removed(tbl.obj_sect)
 		end
  	end
-	-- телепортатор
-	func_by_string["on_take_teleportator"] = function (params_string)
-		spawn_level_changer.on_take_teleportator_chunk(params_string)
-	end
-	func_by_string["use_teleportator"] = function (params_string)
-		level.start_stop_menu(ui_teleportator.teleportator_menu(), true)
-	end
 	-- битва
 	func_by_string["battle"] = function (params_string)
 		battle.show_must_go_on(params_string)
 	end
 	func_by_string["battle_rest"] = function (params_string)
 		battle.reinforcement(params_string)
-	end
-	-- третья рука
-	func_by_string["zvuki"] = function (params_string)
-		zvuki.restore_weapon()
 	end
 	func_by_string["monster_parts"] = function (params_string)
 		monster_parts.restore_weapon()
@@ -643,42 +632,11 @@ local func_by_string = {}
 	func_by_string["grenade_flash_disable"] = function (params_string)
 		db.actor:disable_info_portion("grenade_flash_blow")
 	end
-	func_by_string["unload_wpn_time"] = function (params_string)
-		 local sobj = alife():object(params_string)
-		 if sobj then
-			 local obj = level.object_by_id(sobj.id)
-			 if obj and not death_manager.unique_wpn[obj:section()] then
-				 --amk.send_tip("Разрядили ",tostring(obj:name()),0,15,"gen_info")
-				 obj:unload_magazine()
-			 end
-		 end
-	 end
-	func_by_string["wpn_cond_time"] = function (params_string)
-		 local sobj = alife():object(params_string)
-		 if sobj then
-			 local obj = level.object_by_id(sobj.id)
-			 if obj and not death_manager.unique_wpn[obj:section()] then
-				--amk.send_tip("Состояние ",tostring(obj:name()),0,15,"gen_info")
-				obj:set_condition((math.random(20, 50)+5*(3-level.get_game_difficulty()))/100)
-			 end
-		 end
-	 end
-	func_by_string["anom_remover"] = function (params_string)
-		if not new_dialog.item_much("art_acumm", 2) then return end
-		alife():release(alife():object(params_string))
-		sak.out_item_namber("art_acumm", 2)
-	end
 	func_by_string["mm_opt"] = function (params_string)
 		db.actor:disable_info_portion("mm_opt")
 	end
 	func_by_string["set_flame_ammo"] = function (params_string)
 		flamethrower.set_flame_ammo(params_string)
-	end
-	func_by_string["hand_teleporter_jumpto"] = function (params_string)
-		meceniy_intellectual.jumpTo(params_string)
-	end
-	func_by_string["teleport_jumpto"] = function (params_string)
-		spawn_level_changer.jumpTo(params_string)
 	end
 	func_by_string["sleep_feed_actor"] = function (params_string)
 		kostya_dialog.sleep_feed_actor(params_string)
@@ -875,10 +833,6 @@ local func_by_string = {}
 	func_by_string["af_transform"] = function (params_string)
 		mod_call("af_transform_end",unpack_array_from_string(params_string))
 	end
-	func_by_string["af_transform_universal"] = function (params_string)
-		--get_console():execute("load ~#I#:"..string.format(" af_transform_universal_end: "..params_string))
-		mod_call("af_transform_universal_end", unpack_array_from_string(params_string))
-	end
 	func_by_string["blowout"] = function (params_string)
 		mod_call("Blowout_pp",params_string)
 	end
@@ -905,36 +859,26 @@ local func_by_string = {}
 			news_main.check_news()
 		end
  	end
-	func_by_string["outfit_cond"] = function (params_string)
-		local data = unpack_array_from_string(params_string)
-		local a = level.object_by_id(data[1])
-		if a then
-			a:set_condition(data[2]/100)
-		end
- 	end
-	func_by_string["npc_clear_spawn"] = function (params_string)
-		local data = unpack_array_from_string(params_string)
-		death_manager.npc_clear_spawn(data[1], data[2], data[3], data[4])
- 	end
-	func_by_string["healing_enemies"] = function (params_string)
-		local arr = unpack_array_from_string(params_string)
-		local npc_id = arr[1]
-		local npc_com = arr[2]
-		local npc = level.object_by_id(npc_id)
-		if npc and npc:alive() and not npc:wounded() then
-			if math_random(100) < 80 then
-				if math_random() < 0.35 then
-					npc:set_character_community(npc_com)
-				end
-				if math_random() < 0.85 then
-					xr_wounded.custom_change(npc)
-				end
-			else
-				npc:set_character_community(npc_com)
-				npc:set_relation(game_object.enemy, db.actor)
-			end
-		end
- 	end
+        func_by_string[ "healing_enemies" ] = function( params_string )
+          local arr     = unpack_array_from_string( params_string )
+          local npc_id  = arr[ 1 ]
+          local npc_com = arr[ 2 ]
+          local npc     = level.object_by_id( npc_id )
+          if npc and npc:alive() and not npc:wounded() then
+            if math_random( 100 ) < 80 then
+              if math_random() < 0.35 then
+                npc:set_character_community( npc_com )
+              end
+              if math_random() < 0.85 then
+                xr_wounded.custom_change( npc )
+              end
+            else
+              npc:set_character_community( npc_com )
+              npc:set_relation( game_object.enemy, db.actor )
+            end
+          end
+          xr_wounded.custom_change( npc )
+        end
 	func_by_string["timer_drop_obj_varka"] = function (params_string)
 		local tbl = unpack_array_from_string(params_string)
 		local sobj = alife():object(tbl.obj_id)
@@ -976,22 +920,6 @@ local func_by_string = {}
 		else
 			-- переложили
 			--amk.send_tip("переложили","переложили",0,15,"gen_info")
-		end
- 	end
-	func_by_string["timer_drop_obj_teleport"] = function (params_string)
-		-- телепорт запускаем только когда сьели
-		local tbl = unpack_array_from_string(params_string)
-		local sobj = alife():object(tbl.obj_id)
-		if sobj == nil then
-			spawn_level_changer.do_teleport(tbl.obj_sect)
-		end
- 	end
-	func_by_string["timer_drop_obj_hand_teleporter"] = function (params_string)
-		-- телепорт запускаем только когда сьели
-		local tbl = unpack_array_from_string(params_string)
-		local sobj = alife():object(tbl.obj_id)
-		if sobj == nil then
-			meceniy_intellectual.hand_teleporter_use()
 		end
  	end
 	func_by_string["babah_drop_timeBomb"] = function (params_string)
@@ -1327,7 +1255,7 @@ end
 --есть ли переменная
 function has_variable(variable_name)
   local vn=compress_name(variable_name)
-  local npc_id = xr_logic.get_pda_id(vn,"проверяем")
+  local npc_id = xr_logic.get_pda_id(vn,"перевіряємо")
   return db.storage[npc_id].pstor[vn] ~= nil
 end
 
@@ -1410,7 +1338,7 @@ end
 
 --инвентарное название объекта
 function get_inv_name(section)
-  --return system_ini():r_string(section,"inv_name")
+  --return sys_ini:r_string(section,"inv_name")
   return getIniValueString(section,"inv_name","",nil)
 end
 
@@ -1628,8 +1556,8 @@ function on_item_drop(obj)
 gps_habar.on_item_drop(obj) --idler++--
   mod_call("check_for_af_drop",obj)
   mod_call("check_for_item_drop",obj)
-  mod_call("check_sleep_item",obj)
-  mod_call("check_beacon_drop",obj)
+--  mod_call("check_sleep_item",obj)
+--  mod_call("check_beacon_drop",obj)
   amkii_transmutator.amkUseTransmutator(obj)
 
 flamethrower.have_a_fire_kolobok()
@@ -1664,16 +1592,18 @@ function on_actor_upade(delta)
 	oau_watchdog=98
   mod_call("check_radar_off")
 	oau_watchdog=97
-  mod_call("check_metka")
-	oau_watchdog=96
-  mod_call("doabcevents")
-	oau_watchdog=95
-  mod_call("weather_manager")
+--  mod_call("check_metka")
+--	oau_watchdog=96
+-- Динамический худ
+--	ogse_dynamic_hud.doabcevents()
+--	oau_watchdog=95
+--  mod_call("weather_manager")
 	oau_watchdog=94
   mod_call("check_armor")
 	oau_watchdog=93
   mod_call("interactive_music")
-  mod_call("firebat_ammo")
+-- moved to dsh_remove_ammo.script
+--  mod_call("firebat_ammo")
   --!!! alcohol modification by Terrapack
 	--oau_watchdog=931
   --amk_alcohol.check_alcohol()
@@ -1707,6 +1637,7 @@ function on_actor_upade(delta)
 	oau_watchdog=90
 
 	if gg_kick and db.actor:alive() then
+--[[
 		if prev_health>actor.health+0.05 then
 			level.add_pp_effector("amk_shoot.ppe", 2011, false)
 			level.set_pp_effector_factor(2011, (prev_health-db.actor.health)*100)  
@@ -1730,6 +1661,7 @@ function on_actor_upade(delta)
 				end
 			end			
 		end
+]]
 		prev_health = actor.health
 	end
 	oau_watchdog=89
@@ -1846,19 +1778,16 @@ if (news_main and news_main.on_death) then
 end
 	amk_anoms.unreg_in_anom_manager(victim)
   mod_call("generate_recipe",victim,who)
-	mod_call("firebated", victim, 1, nil, who, 14)
 	mod_call("zomby_blow",victim)
 end
 
 function on_npc_hit(obj, amount, local_direction, who, bone_index)
-	mod_call("firebated", obj, amount, local_direction, who, bone_index)
 	if db.actor and who and who:id()==db.actor:id() and amount>0 then
 		mod_call("calc_adrenaline","actor_hit_enemy",obj,"npc")
 	end
 end
 
 function on_monster_hit(obj, amount, local_direction, who, bone_index)
-	mod_call("firebated", obj, amount, local_direction, who, bone_index)
 	if db.actor and who and who:id()==db.actor:id() and amount>0 then
 		mod_call("calc_adrenaline","actor_hit_enemy",obj,"monster")
 	end
@@ -1966,7 +1895,7 @@ function on_game_load()
 ]]
   
 --user area 
-	if system_ini():r_float("gg_kick","enabled")>0.0 then gg_kick=true else gg_kick=false end
+	if sys_ini:r_float("gg_kick","enabled")>0.0 then gg_kick=true else gg_kick=false end
   mod_call("test_sleep_pp")
   mod_call("check_spawn")
 --  local str=string
@@ -1987,7 +1916,7 @@ end
 
 -- Эта функция вызывается самой первой. Онлайновые объекты недоступны! db.actor недоступен!
 function on_game_start()
-  mod_call("on_game_start")
+  --mod_call("on_game_start")
 	ver = get_ver()
 	getStartTime()
 	--updateGameTime()
@@ -1997,15 +1926,15 @@ function on_game_start()
 end
 
 function getStartTime()
-  local strTime = system_ini():r_string("alife", "start_time")
+  local strTime = sys_ini:r_string("alife", "start_time")
   local t = str_explode(":", strTime, true)
-  local d = str_explode(".",  system_ini():r_string("alife", "start_date"), true)
+  local d = str_explode(".",  sys_ini:r_string("alife", "start_date"), true)
   StartTime = game.CTime()
   StartTime:set(d[3], d[2], 1, 0, 0, 0, 0)
   local temp = game.CTime()
   temp:setHMS(24,0,0)
   StartTime = StartTime - temp
-  xrs_utils.getStartTime(StartTime)
+--  xrs_utils.getStartTime(StartTime)
   --sak.dbglog("on_game_start: StartTime = %s %s",StartTime:dateToString(0), StartTime:timeToString(1))
 end
 

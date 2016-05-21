@@ -24,7 +24,11 @@ function wait_ten_minutes()
 	sleep_manager.main (0.16)
 end
 
-function main(scale)
+function main( scale )
+  return ogse_sleep_mgr.begin_sleep( scale )
+end
+
+function main_old(scale)
 dream_time = scale
 if scale > 1 then
 --    u3_utils.savegame_date("Сон") -- autosave
@@ -61,7 +65,7 @@ function starter(scale)
 end
 
 function dreamer()
-	level.set_time_factor(system_ini():r_float("alife","time_factor"))
+	level.set_time_factor(sys_ini:r_float("alife","time_factor"))
 	if sleep_manager.is_sleep_active() then
 		sleep_manager.hp_corrector(0)
 		local dream = dream.sleep_video_name_callback()
@@ -72,11 +76,15 @@ function dreamer()
 end
 
 function stopper()
+  return ogse_sleep_mgr.break_sleep()
+end
+
+function stopper_old()
   if not is_sleep_active() then
     return
   end
 --	get_console():execute("stoping")
-	level.set_time_factor(system_ini():r_float("alife","time_factor"))
+	level.set_time_factor(sys_ini:r_float("alife","time_factor"))
 	ar_sleep.disable_scheme()
 
 	if amk_corpses then
@@ -115,6 +123,10 @@ function hp_corrector(fr)
 end
 
 function is_sleep_active()
+  return ogse_sleep_mgr.is_sleep_active()
+end
+
+function is_sleep_active_old()
 	if db.storage[db.actor:id()].active_scheme == "ar_sleep" then 
 		return true 
 	end

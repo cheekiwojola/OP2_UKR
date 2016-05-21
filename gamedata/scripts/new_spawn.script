@@ -20,19 +20,19 @@ end
 
 
 function bar_informator()
-local obj = alife():create("mil_trader_gavr",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
+local obj = dsh.create_free_npc("mil_trader_gavr",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
 local params=amk.read_stalker_params(obj)
 params.custom="[logic]\nactive=walker\n[walker]\npath_walk = mil_trader_gavr_walk1\npath_look = mil_trader_gavr_look1\ncombat_ignore_cond=always"
 params.sid=9623
 amk.write_stalker_params(params,obj)
 
-local obj = alife():create("mil_gavr_bodyguard1",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
+local obj = dsh.create_free_npc("mil_gavr_bodyguard1",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
 local params=amk.read_stalker_params(obj)
 params.custom="[logic]\nactive=walker\n[walker]\npath_walk = mil_gavr_bodyguard1_walk1\npath_look = mil_gavr_bodyguard1_look1\ncombat_ignore_cond=always"
 params.sid=9624
 amk.write_stalker_params(params,obj)
 
-local obj = alife():create("mil_gavr_bodyguard2",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
+local obj = dsh.create_free_npc("mil_gavr_bodyguard2",vector():set(25.325489,-8.35158157,-17.512226425),330707,1587)
 local params=amk.read_stalker_params(obj)
 params.custom="[logic]\nactive=walker\n[walker]\npath_walk = mil_gavr_bodyguard2_walk1\npath_look = mil_gavr_bodyguard2_look1\ncombat_ignore_cond=always"
 params.sid=9625
@@ -66,14 +66,19 @@ local obj = alife():create("ros_killer_respawn_4",vector():set(-263.326446,-0.00
 local obj = alife():create("ros_killer_respawn_4",vector():set(-248.740127,-0.00184855,6.270340919),10240,1396)
 end
 
+
 function under_stalker()
-local obj=amk.spawn_item("stalker_agro_und",vector():set(-38.554332733,-4.621260643,-26.150243759),733,4747)
-        local tbl = amk.read_stalker_params(obj)
-        tbl.sid = 9660
-        tbl.health = 0
-	tbl.updhealth = 0
-        amk.write_stalker_params(tbl, obj)
+  local obj = dsh.create_free_npc(
+    "stalker_agro_und",
+    vector():set( -38.554332733, -4.621260643, -26.150243759 ), 4747, 733
+  )
+  local tbl = amk.read_stalker_params(obj)
+  tbl.sid       = 9660
+  tbl.health    = 0
+  tbl.updhealth = 0
+  amk.write_stalker_params( tbl, obj )
 end
+
 
 function under_kontr()
 local obj = alife():create("m_controller_old",vector():set(-50.33838653564,-6.51431989,9.447748184),4221,727)
@@ -453,25 +458,25 @@ local obj = alife():create("gold_art",vector():set(577.39178466797,9.09050655364
 end
 
 function tri_tainik_firstsp()
-local obj = alife():create("bloodsucker_strong",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
-local obj = alife():create("bloodsucker_effector",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
-local obj = alife():create("bloodsucker_mil",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
-local obj = alife():create("bloodsucker_normal",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
-local obj = alife():create("bloodsucker_strong",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
+local obj = dsh.create_free_monster("bloodsucker_strong",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
+local obj = dsh.create_free_monster("bloodsucker_effector",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
+local obj = dsh.create_free_monster("bloodsucker_mil",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
+local obj = dsh.create_free_monster("bloodsucker_normal",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
+local obj = dsh.create_free_monster("bloodsucker_strong",vector():set(370.66629,-0.00156867504,406.57116699),123988,2586)
 end
 
 function tri_tainik_secondsp()
-local obj = alife():create("electro_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
-local obj = alife():create("new_electro_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
-local obj = alife():create("fire_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
-local obj = alife():create("chimera_x_ray",vector():set(562.12567,0.6415554,374.206726),136487,2586)
+local obj = dsh.create_free_monster("electro_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
+local obj = dsh.create_free_monster("new_electro_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
+local obj = dsh.create_free_monster("fire_chimera",vector():set(562.12567,0.6415554,374.206726),136487,2586)
+local obj = dsh.create_free_monster("chimera_x_ray",vector():set(562.12567,0.6415554,374.206726),136487,2586)
 end
 
 function tri_tainik_thirdsp()
-local obj = alife():create("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
-local obj = alife():create("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
-local obj = alife():create("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
-local obj = alife():create("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
+local obj = dsh.create_free_monster("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
+local obj = dsh.create_free_monster("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
+local obj = dsh.create_free_monster("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
+local obj = dsh.create_free_monster("controller_tubeman",vector():set(446.917,-0.09459,73.922073),147015,2602)
 end
 
 

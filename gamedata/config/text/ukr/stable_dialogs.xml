@@ -36,4 +36,206 @@
 	<string id="hello_dialog_3">
 		<text>Чуєш, братчику, допоможи!</text>
 	</string>
+
+<!-- COMPANION STALKER -->	
+	
+	<string id="companion_release_dialog_0">
+		<text>Спасибі тобі, друже. Далі один піду.</text>
+	</string>	
+	
+	<string id="companion_release_dialog_1">
+		<text>І тобі спасибі. Хай щастить.</text>
+	</string>
+
+	<string id="companion_hire_dialog_0">
+		<text>Не бажаєш скласти мені компанію?</text>
+	</string>	
+	
+	<string id="companion_hire_dialog_1">
+		<text>Чому б і не скласти. Я згоден.</text>
+	</string>
+
+	<string id="companion_hire_dialog_2">
+		<text>Вибач, у мене інші плани.</text>
+	</string>
+
+	<string id="companion_hire_dialog_3">
+		<text>Ні, ну тебе нахрін, я боюся з тобою йти.</text>
+	</string>
+
+	<string id="companion_hire_dialog_4">
+		<text>Ішов би ти під три чорти, Мічений, з тобою ще ніхто назад не повертався. Шукай собі відмичок в іншому місці.</text>
+	</string>
+
+	<string id="companion_hire_dialog_5">
+		<text>Вибач але не можу. Втомився я мотатися по Зоні, перепочити мені треба.</text>
+	</string>
+
+	<string id="companion_hire_dialog_6">
+		<text>Ні, хлопчина, зелений ти ще зі мною у Зону ходити. Не потягнеш, вже не ображайся.</text>
+	</string>
+
+	<string id="companion_hire_dialog_7">
+		<text>Ні, Мічений, я з тобою боюсь йти. Ти в такі закутки Зони лазиш, де я і години не протримаюся. Хіба що відмичкою попрацюю... краще вже я сам тут поки що, на мілкій воді. Дивишся, і хабарка знайду, і живий залишуся.</text>
+	</string>
+
+	<string id="companion_hire_dialog_8">
+		<text>Ні, з тобою і так вже достатньо народу, ні до чого натовпами по Зоні бродити, не любить вона цього.</text>
+	</string>
+
+	<string id="companion_hire_dialog_9">
+		<text>Мічений, ти вже не ображайся, але поки ти не з наших - у нас з тобою загальних справ бути не може.</text>
+	</string>
+
+	<string id="companion_management_dialog_0">
+		<text>Давай обговоримо нашу тактику.</text>
+	</string>
+
+	<string id="companion_management_dialog_1">
+		<text>Я слухаю.</text>
+	</string>
+
+	<string id="companion_management_dialog_2">
+		<text>Слідуй за мною.</text>
+	</string>
+
+	<string id="companion_management_dialog_3">
+		<text>Як мені при цьому поводитися?</text>
+	</string>
+
+	<string id="companion_management_dialog_4">
+		<text>Просто йди за мною і будь насторожі.</text>
+	</string>
+
+	<string id="companion_management_dialog_5">
+		<text>Іди за мною і старайся підпустити ворога ближче.</text>
+	</string>
+
+	<string id="companion_management_dialog_6">
+		<text>Іди за мною і атакуй тільки при крайній необхідності.</text>
+	</string>	
+	
+	<string id="companion_management_dialog_7">
+		<text>Чекай тут.</text>
+	</string>
+
+	<string id="companion_management_dialog_8">
+		<text>Як мені при цьому поводитися?</text>
+	</string>
+
+	<string id="companion_management_dialog_9">
+		<text>Просто чекай тут і будь насторожі.</text>
+	</string>
+
+	<string id="companion_management_dialog_10">
+		<text>Чекай тут і старайся підпустити ворога ближче.</text>
+	</string>
+
+	<string id="companion_management_dialog_11">
+		<text>Чекай тут і атакуй тільки при крайній необхідності.</text>
+	</string>
+
+	<string id="companion_management_dialog_12">
+		<text>Крадись за мною.</text>
+	</string>
+
+	<string id="companion_management_dialog_13">
+		<text>Як мені при цьому поводитися?</text>
+	</string>
+
+	<string id="companion_management_dialog_14">
+		<text>Просто крадись за мною і будь насторожі.</text>
+	</string>
+
+	<string id="companion_management_dialog_15">
+		<text>Крадись за мною і старайся підпустити ворога ближче.</text>
+	</string>
+
+	<string id="companion_management_dialog_16">
+		<text>Крадись за мною і атакуй тільки при крайній необхідності.</text>
+	</string>
+
+	<string id="companion_management_dialog_17">
+		<text>Сховайся тут.</text>
+	</string>
+
+	<string id="companion_management_dialog_18">
+		<text>Як мені при цьому поводитися?</text>
+	</string>
+
+	<string id="companion_management_dialog_19">
+		<text>Просто сховайся тут і будь насторожі.</text>
+	</string>
+
+	<string id="companion_management_dialog_20">
+		<text>Сховайся тут і старайся підпустити ворога ближче.</text>
+	</string>
+
+	<string id="companion_management_dialog_21">
+		<text>Сховайся тут і атакуй тільки при самій крайній необхідності.</text>
+	</string>	
+	
+	<string id="companion_management_dialog_weapon_root">
+		<text>До речі, щодо зброї...</text>
+	</string>
+	
+	<string id="companion_management_dialog_weapon_what">
+		<text>Так?</text>
+	</string>
+	
+	<string id="companion_management_dialog_weapon_use_anything">
+		<text>Використовуй все, що є під рукою.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_pistol">
+		<text>Використовуй пістолет.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_submashinegun">
+		<text>Використовуй пістолет-кулемет.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_shotgun">
+		<text>Використовуй дробовик.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_assault_shotgun">
+		<text>Використовуй штурмовий дробовик.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_carbine">
+		<text>Використовуй карабін.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_assault_rifle">
+		<text>Використовуй штурмову гвинтівку.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_sniper_rifle">
+		<text>Використовуй снайперську гвинтівку.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_mashinegun">
+		<text>Використовуй кулемет.</text>
+	</string>
+	
+	<string id="companion_management_dialog_weapon_use_grenade_launcher">
+		<text>Використовуй гранатомет.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_use_flamethrower">
+		<text>Використовуй вогнемет.</text>
+	</string>
+	
+	<string id="companion_management_dialog_weapon_allright">
+		<text>Зрозумів.</text>
+	</string>
+
+	<string id="companion_management_dialog_weapon_its_a_threeheaded_monkey">
+		<text>Гей, у тебе за спиною триголова мавпа!</text>
+	</string>
+	
+	<string id="companion_management_dialog_weapon_omg_its_a_lion">
+		<text>Де? Блін, вистачить приколюватися :)</text>
+	</string>	
 </string_table>

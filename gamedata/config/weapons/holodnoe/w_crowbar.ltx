@@ -1,3 +1,4 @@
+; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;; Монтировка Фримена (Реабилитация - Александрыч) ;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,8 +21,8 @@ inv_name					= "Монтувальний лом"
 
 inv_name_short				= "Монтувальний лом"
 inv_weight					= 3.5
-inv_grid_width			= 0
-inv_grid_height			= 0
+inv_grid_width				= 3
+inv_grid_height				= 1
 inv_grid_x                   = 30
 inv_grid_y                   = 2
 
@@ -75,7 +76,7 @@ hit_type				 	= wound
 
 hit_power_2                	= 6.5
 hit_impulse_2	         	     = 80
-hit_type_2				 	= explosion ; wound_2
+hit_type_2				 	= wound ; wound_2
 
 fire_distance            	= 2.9
 bullet_speed			 	= 1000;500			;начальная скорость пули
@@ -110,6 +111,7 @@ zoom_enabled				= false
 snd_shoot					= weapons\knife_1
 
 weapon_remove_time			= 5000	;время уничтожения оружия (с учетом TimeFactor) для мультиплеера
+fake_item_section = fake_wpn_crowbar
 
 [wpn_crowbar_hud]
 shell_point				= 0.0, 0.0, 0.0
@@ -162,4 +164,4 @@ animation_slot		= 4
 
 ;hud item
 hud = wpn_vodka_hud
-
+real_item_section = wpn_crowbar

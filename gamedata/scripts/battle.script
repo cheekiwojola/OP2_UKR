@@ -1,3 +1,8 @@
+function attach( sm )
+  sm:subscribe({
+    signal = "on_monster_update", fun = this.cleanup, queued = true
+  })
+end
 --[[
 Универсальный скрипт больших битв с монстрами/неписями
 Поддерживаются:
@@ -5221,7 +5226,7 @@ function show_must_go_on(params_string)
 		for s,p in pairs(cur_wave["enemy"]) do
 			for i=1,p do
 				pos, lv = get_pos(cur_wave.dist, sector)
-				alife():create(s, pos, lv, db.actor:game_vertex_id())
+				dsh.create_free_mob(s, pos, lv, db.actor:game_vertex_id())
 				monster_cnt = monster_cnt+1
 			end
 		end
@@ -5431,13 +5436,22 @@ function show_off()
 	db.actor:disable_info_portion("battle")
 end
 
+
 -- "быстрый" уборщик
 -- ускоренное удаление трупов при очень больших битвах. вызывается из апдейта монстров
-function cleanup(obj)
-    if has_alife_info("battle") and (not obj:alive()) and db.actor:position():distance_to(obj:position()) > cleanup_distance then
-		alife():release(alife():object(obj:id()), true)
-	end
+local cleanup_t
+function cleanup( obj )
+  if cleanup_t and cleanup_t > time_global() then return end
+  if
+    has_alife_info( "battle" )
+    and ( not obj:alive() )
+    and db.actor:position():distance_to( obj:position() ) > cleanup_distance
+  then
+    alife():release( alife():object( obj:id() ), true )
+  end
+  cleanup_t = time_global() + 1000
 end
+
 
 -- проверка попадания точки спавна в аномалию
 function no_anomaly_in(pos)

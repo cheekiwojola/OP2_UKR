@@ -390,6 +390,13 @@ function play_snd_from_obj(actor, npc, p)
     end
   end
 end
+-- играть звук от указанного объекта. Объект от которого играть задаётся параметром npc
+function play_snd_from_obj2(actor, npc, p)
+	ASSERT(p[1], "play_snd_from_obj2: sound is not defined for object '%s'", npc:name())
+	local snd_obj = xr_sound.get_safe_sound_object(p[1])
+	ASSERT(snd_obj, "play_snd_from_obj2: problem creating sound '%s' for object '%s'", p[1], npc:name())
+	snd_obj:play_no_feedback(npc, sound_object.s3d, 0, npc:position(), 1.0)
+end
 
 -- играть звук от указанного объекта
 function play_snd_now(actor, npc, p)
@@ -2865,11 +2872,6 @@ function bitvakl_done()
 	db.actor:give_info_portion("bitvakl_done")
 end
 
--- взносы
-function vzn12_restr()
-	db.actor:give_info_portion("vzn_temp1")
-end
-
 function tm_sr1_do()
 	kostya_dialog.delete_teleport("tm_teleport_1")
 	kostya_dialog.delete_teleport("tm_teleport_2")
@@ -3035,7 +3037,7 @@ function strike_end_spawn()
 end
 function foto_ohota_spawn()
 	alife():create("wpn_pm",vector():set(-65.136116027832,-4.0836248397827,-142.66575622559),3725,704)
-	local se_obj = alife():create("journalist_npc",vector():set(-65.448280334473,-4.437150478363,-143.68698120117),3724,704)
+	local se_obj = dsh.create_free_npc("journalist_npc",vector():set(-65.448280334473,-4.437150478363,-143.68698120117),3724,704)
 	snp.set_stalker_story_id(se_obj,21023)
 	se_obj:on_death()
 end
@@ -3113,3 +3115,21 @@ relation_registry.set_community_goodwill ("dolg", "actor", -2000)
 end
 -- Oksana579 biorobot end
 
+
+function dsh_ogse_var_delete( actor, npc, p )
+  return ogse.delete_var( p[ 1 ] )
+end
+
+
+function dsh_set_ogse_var_true( actor, npc, p )
+  return ogse.save_var( p[ 1 ], true, bool )
+end
+
+
+function dsh_map_remove_spot( actor, npc, p )
+  local id = npc:id()
+  level.map_remove_object_spot( id, "treasure" )
+  for spot = 1, 4 do
+    level.map_remove_object_spot( id, "crlc_big_treasure" .. spot )
+  end
+end

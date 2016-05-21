@@ -609,7 +609,7 @@ eat_satiety = 0
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
-eat_portions_num = 1
+eat_portions_num 	= 1000000
 eat_alcohol = 0.3
 
 ; food item
@@ -646,7 +646,7 @@ eat_satiety = 0
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
-eat_portions_num = 1
+eat_portions_num 	= 1000000
 eat_alcohol = 0.3
 
 ; food item
@@ -801,6 +801,7 @@ description			= "Одноразовый телепорт, знайдений у чиїйсь нічці."
 inv_name			= Телепорт
 inv_name_short		= Телепорт
 quest_item         = true
+eat_portions_num = 1
 [gena_tele2]:gena_tele1
 [gena_tele3]:gena_tele1
 
@@ -814,6 +815,7 @@ inv_grid_width     = 2
 inv_grid_height    = 2
 inv_grid_x         = 68
 inv_grid_y         = 53
+eat_portions_num = 1
 
 [pampers]:arhara_obman1
 inv_name           = pampers
@@ -826,6 +828,7 @@ inv_grid_height    = 1
 inv_grid_x         = 41
 inv_grid_y         = 12
 cost				= 0
+eat_portions_num = 1
 
 [arhara_listok]:identity_immunities
 GroupControlSection	= spawn_group
@@ -1699,12 +1702,10 @@ artefact_activation_seq		= af_activation_mincer
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed = 0.0
-radiation_restore_speed = 0.0
+radiation_restore_speed = 0.001 ;0.0
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
-
-inventory_radiation		= 0.001
 
 hit_absorbation_sect = kolba_pustay_absorbation
 
@@ -1757,8 +1758,6 @@ satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.007
 
-inventory_radiation		= 0.0
-
 hit_absorbation_sect = kolba_krasn_absorbation
 
 [kolba_krasn_absorbation]
@@ -1809,8 +1808,6 @@ radiation_restore_speed = -0.025
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
-
-inventory_radiation		= -0.025
 
 hit_absorbation_sect = kolba_fiol_absorbation
 
@@ -1949,12 +1946,10 @@ artefact_activation_seq		= af_activation_electra
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed = 0.001
-radiation_restore_speed = 0.0
+radiation_restore_speed = 0.001 ;0.0
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
-
-inventory_radiation		= 0.001
 
 hit_absorbation_sect = kolba_siniy_poln_absorbation
 
@@ -2004,12 +1999,10 @@ artefact_activation_seq	= af_activation_mincer
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed = 0.0
-radiation_restore_speed = 0.0
+radiation_restore_speed = 0.001 ;0.0
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.007
-
-inventory_radiation		= 0.001
 
 hit_absorbation_sect = kolba_orand_poln_absorbation
 
@@ -2457,8 +2450,6 @@ satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
 
-inventory_radiation		= 0.0
-
 hit_absorbation_sect = pult_anders_absorbation
 
 [pult_anders_absorbation]
@@ -2513,8 +2504,6 @@ satiety_restore_speed     = 0.0
 power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
-inventory_radiation		  = 0.0
-
 hit_absorbation_sect      = imitator_absorbation
 
 [imitator_absorbation]
@@ -2568,8 +2557,6 @@ radiation_restore_speed = 0.0
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
-
-inventory_radiation		= 0.0
 
 hit_absorbation_sect = anomal_pole_absorbation
 
@@ -2638,13 +2625,11 @@ lights_enabled                 = false	;true
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0007			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.0015 ;0.0
 satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_part_monolit1_absorbation
-
-inventory_radiation		     = 0.0015
 
 [af_part_monolit1_absorbation]
 burn_immunity                   = 0.9		;коэффициенты иммунитета 
@@ -2686,13 +2671,11 @@ lights_enabled                 = false	;true
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0009			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.0015 ;0.0
 satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.005
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_part_monolit2_absorbation
-
-inventory_radiation		     = 0.0015
 
 [af_part_monolit2_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -2736,13 +2719,11 @@ trail_light_range = 0.5
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.001 ;0.0
 satiety_restore_speed		= -0.0055
 power_restore_speed		     = 0.03
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_water_flower_absorbation
-
-inventory_radiation		     = 0.001
 
 [af_water_flower_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -2787,13 +2768,11 @@ trail_light_range              = 0.5
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.001 ;0.0
 satiety_restore_speed		= -0.0055
 power_restore_speed		     = 0.025
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_water_flower1_absorbation
-
-inventory_radiation		     = 0.001
 
 [af_water_flower1_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -2835,13 +2814,11 @@ trail_light_range               = 0.4
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed              = 0.0			
-radiation_restore_speed           = 0.0
+radiation_restore_speed           = 0.0007 ;0.0
 satiety_restore_speed             = 0.0
 power_restore_speed               = -0.003
 bleeding_restore_speed            = 0.0
 hit_absorbation_sect              = af_spiral_absorbation
-
-inventory_radiation		= 0.0007
 
 [af_spiral_absorbation]
 burn_immunity                     = 0.8				;коэффициенты иммунитета 
@@ -2911,13 +2888,11 @@ trail_light_range                  = 1.0
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed              = 0.0			
-radiation_restore_speed           = 0.0
+radiation_restore_speed           = 0.001 ;0.0
 satiety_restore_speed             = 0.0
 power_restore_speed               = 0.0
 bleeding_restore_speed            = 0.0
 hit_absorbation_sect              = af_eye_voron_absorbation
-
-inventory_radiation		          = 0.001
 
 [af_eye_voron_absorbation]
 burn_immunity                     = 0.80				;коэффициенты иммунитета 
@@ -2966,7 +2941,6 @@ radiation_restore_speed		= 0.0
 satiety_restore_speed		= 0.0				
 power_restore_speed		     = 0.0				
 bleeding_restore_speed		= 0.0
-inventory_radiation		     = 0.0
 		
 hit_absorbation_sect		= mini_antenna1_absorbation
 
@@ -3019,7 +2993,6 @@ radiation_restore_speed		= 0.0
 satiety_restore_speed		= 0.0				
 power_restore_speed		     = 0.0				
 bleeding_restore_speed		= 0.0
-inventory_radiation		     = 0.0
 		
 hit_absorbation_sect		= mini_antenna2_absorbation
 
@@ -3073,7 +3046,6 @@ radiation_restore_speed		= 0.0
 satiety_restore_speed		= 0.0				
 power_restore_speed		     = 0.0				
 bleeding_restore_speed		= 0.0
-inventory_radiation		     = 0.0
 		
 hit_absorbation_sect		= mini_antenna3_absorbation
 
@@ -3127,7 +3099,6 @@ radiation_restore_speed		= 0.0
 satiety_restore_speed		= 0.0				
 power_restore_speed		     = 0.0				
 bleeding_restore_speed		= 0.0
-inventory_radiation		     = 0.0
 		
 hit_absorbation_sect		= mini_antenna4_absorbation
 
@@ -3181,7 +3152,6 @@ radiation_restore_speed		= 0.0
 satiety_restore_speed		= 0.0				
 power_restore_speed		     = 0.0				
 bleeding_restore_speed		= 0.0
-inventory_radiation		     = 0.0
 		
 hit_absorbation_sect		= mini_antenna5_absorbation
 
@@ -3264,8 +3234,6 @@ satiety_restore_speed     = 0.0
 power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
-inventory_radiation		  = 0.0
-
 hit_absorbation_sect      = imitator_snezka_absorbation
 
 [imitator_snezka_absorbation]
@@ -3317,8 +3285,6 @@ satiety_restore_speed     = 0.0
 power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
-inventory_radiation		  = 0.0
-
 hit_absorbation_sect      = imitator_holodez_absorbation
 
 [imitator_holodez_absorbation]
@@ -3368,8 +3334,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 1.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_kamen_udachy_absorbation
-
-inventory_radiation		     = 0.0
 
 [af_kamen_udachy_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -3423,8 +3387,6 @@ satiety_restore_speed     = 0.0
 power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
-inventory_radiation		  = 0.0
-
 hit_absorbation_sect      = imitator_shar_absorbation
 
 [imitator_shar_absorbation]
@@ -3473,8 +3435,6 @@ radiation_restore_speed   = 0.0
 satiety_restore_speed     = 0.0
 power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
-
-inventory_radiation		  = 0.0
 
 hit_absorbation_sect      = imitator_tele_final1_absorbation
 
@@ -3526,11 +3486,10 @@ artefact_activation_seq		= artifact_lavahell1
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed             = 0.0
-radiation_restore_speed          = 0.0
+radiation_restore_speed          = 0.0011 ;0.0
 satiety_restore_speed            = 0.0
 power_restore_speed              = 0.001
 bleeding_restore_speed           = 0.0
-inventory_radiation		         = 0.0011
 
 hit_absorbation_sect             = af_babka_4_absorbation
 
@@ -3656,8 +3615,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 5.45x39_izomorf_absorbation
 
-inventory_radiation		     = 0.00
-
 [5.45x39_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -3707,8 +3664,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 5.45x39_izomorf_1_absorbation
 
-inventory_radiation		     = 0.00
-
 [5.45x39_izomorf_1_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -3755,8 +3710,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= rukzak_izomorf_absorbation
-
-inventory_radiation		     = 0.00
 
 [rukzak_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -3832,8 +3785,6 @@ radiation_restore_speed = 0.0
 satiety_restore_speed = 0.0
 power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
-
-inventory_radiation		= 0.0
 
 hit_absorbation_sect = anomal_pole_foto_absorbation
 
@@ -3977,7 +3928,7 @@ cform				    = skeleton
 class				    = ARTEFACT
 
 visual				    = izomorf\globus_izomorf.ogf  
-description			    = "Глобус. Один з глобальних ізоморфів. Властивості невідомі, однак при носінні в рюкзаку знижує радіоактивний фон артефактів."
+description			    = "Глобус. Один з глобальних ізоморфів. Властивості невідомі."
 inv_name			         = "Ізоморф"
 inv_name_short		         = "Ізоморф"
 inv_weight			    = 1.0
@@ -4005,8 +3956,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izom_globus_absorbation
-
-inventory_radiation		     = -0.002
 
 [izom_globus_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4057,8 +4006,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= osnova_fotik_absorbation
-
-inventory_radiation		     = 0.00
 
 [osnova_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4130,13 +4077,11 @@ trail_light_range = 0.5
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= -0.0001			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.001 ;0.0
 satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= linza_fotik_absorbation
-
-inventory_radiation		     = 0.001
 
 [linza_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4189,8 +4134,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= pushka_fotik_absorbation
 
-inventory_radiation		     = 0.0
-
 [pushka_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4239,8 +4182,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_kristal_absorbation
 
-inventory_radiation		     = 0.0
-
 [izomorf_kristal_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4288,8 +4229,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= psevdokristall_absorbation
-
-inventory_radiation		     = 0.0
 
 [psevdokristall_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4364,8 +4303,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= kaktus_izomorf_absorbation
-
-inventory_radiation		     = 0.0
 
 [kaktus_izomorf_absorbation]
 burn_immunity                   = 0.75		;коэффициенты иммунитета 
@@ -4442,8 +4379,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 7.62x54_izomorf_absorbation
 
-inventory_radiation		     = 0.00
-
 [7.62x54_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4493,8 +4428,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= wa2000_izomorf_absorbation
-
-inventory_radiation		     = 0.00
 
 [wa2000_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4584,13 +4517,11 @@ trail_light_range = 0.5
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.001 ;0.0
 satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0009
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_kompas_absorbation
-
-inventory_radiation		     = 0.001
 
 [izomorf_kompas_absorbation]
 burn_immunity                   = 0.95		;коэффициенты иммунитета 
@@ -4663,8 +4594,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= preplastilin_absorbation
 
-inventory_radiation		     = 0.0
-
 [preplastilin_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4712,8 +4641,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_plastilin_absorbation
-
-inventory_radiation		     = 0.0
 
 [izomorf_plastilin_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4788,8 +4715,6 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 9x39_izomorf_absorbation
 
-inventory_radiation		     = 0.00
-
 [9x39_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4862,8 +4787,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= mem_module_absorbation
-
-inventory_radiation		     = 0.00
 
 [mem_module_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -5273,13 +5196,11 @@ trail_light_range      = 0.4
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed		= 0.0036			
-radiation_restore_speed		= 0.0
+radiation_restore_speed		= 0.01 ;0.0
 satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0144
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_black_angel_absorbation
-
-inventory_radiation		     = 0.01
 
 [af_black_angel_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -5350,8 +5271,6 @@ power_restore_speed		= 0.0072
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_phantom_absorbation
 
-inventory_radiation		     = 0.0
-
 [af_phantom_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -5397,8 +5316,6 @@ satiety_restore_speed		= 0.0
 power_restore_speed		= 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= af_serafim_absorbation
-
-inventory_radiation		     = 0.0
 
 [af_serafim_absorbation]
 burn_immunity                   = 1.05		;коэффициенты иммунитета 

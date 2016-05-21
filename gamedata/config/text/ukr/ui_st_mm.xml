@@ -369,5 +369,151 @@
 	<string id="ui_mm_save_level_game"> 
 		<text>Зберегти на рівні</text> 
     </string>
-
+	<string id="ui_mm_r2_sun_near">
+		<text>Дальність промальовування тіней</text>
+	</string>
+	<string id="ui_mm_r2_tf_mipbias">
+		<text>Чіткість текстур на відстані</text>
+	</string>
+	<string id="ui_mm_r2_gloss_factor">
+		<text>Глянцевість поверхонь</text>
+	</string>
+	<string id="ui_mm_r2_sun_near_border">
+		<text>Кут промальовування тіней</text>
+	</string>
+	<string id="ui_mm_r2_tonemap">
+		<text>Тональне відображення HDR</text>
+	</string>
+	<string id="ui_mm_r2_tonemap_middlegray">
+		<text>Інтенсивність HDR</text>
+	</string>
+		<string id="ui_mm_r2_sun_lumscale">
+		<text>Яскравість світіння сонця</text>
+	</string>
+	<string id="ui_mm_r2_sun_lumscale_amb">
+		<text>Фонова освітленість</text>
+	</string>
+	<string id="ui_mm_cam_inert">
+		<text>Інерція камери</text>
+	</string>
+	<string id="ui_mm_r2_aa">
+		<text>Зглажування</text>
+	</string>	
+	<string id="ui_mm_r2_gi">
+		<text>Глобальне освітлення (експериментально)</text>
+	</string>
+	<string id="qt_off">
+		<text>вимк.</text>
+	</string>
+	<string id="qt_low">
+		<text>низьке</text>
+	</string>
+	<string id="qt_medium">
+		<text>середнє</text>
+	</string>
+	<string id="qt_high">
+		<text>високе</text>
+	</string>
+	<string id="qt_extreme">
+		<text>максимальне</text>
+	</string>
+	<string id="water">
+		<text>на воді</text>
+	</string>
+	<string id="ground">
+		<text>на асфальті</text>
+	</string>
+	<string id="both">
+		<text>на воді і асфальті</text>
+	</string>
+	<string id="ssdo">
+		<text>SSDO</text>
+	</string>
+	<string id="hbao">
+		<text>HBAO</text>
+	</string>	
+	<string id="fxaa">
+		<text>FXAA</text>
+	</string>
+	<string id="smaa">
+		<text>SMAA</text>
+	</string>	
+	<string id="ui_mm_r2_dynamic_dof">
+		<text>Ефект фокусування очей</text>
+	</string>
+	<string id="ui_mm_r2_reload_dof">
+		<text>Ефект глибини сцени при перезарядці</text>
+	</string>
+	<string id="ui_mm_r2_zoom_dof">
+		<text>Ефект глибини сцени при прицілюванні</text>
+	</string>	
+	<string id="ui_mm_r2_dof_quality">
+		<text>Якість ефекта фокусування очей</text>
+	</string>
+	<string id="ui_mm_r2_ssao_base">
+		<text>Screen Space Ambient Occlusion</text>
+	</string>	
+	<string id="ui_mm_r2_rain_drops">
+		<text>Каплі на склі</text>
+	</string>	
+	<string id="ui_mm_r2_soft_particles">
+		<text>М'які партікли</text>
+	</string>	
+	<string id="ui_mm_r__bloodmarks">
+		<text>Блудмарки</text>
+	</string>	
+	<string id="ui_mm_r2_aa">
+		<text>Зглажування (R2)</text>
+	</string>			
+	<string id="ui_mm_r2_aa_mode">
+		<text>Режим зглажування (R2)</text>
+	</string>	
+	<string id="ui_mm_r2_detail_bump">
+		<text>Детальний бамп</text>
+	</string>		
+	<string id="ui_mm_r2_sunshafts">
+		<text>Об'ємні промені</text>
+	</string>	
+	<string id="ui_mm_r2_sunshafts_mode">
+		<text>Тип об'ємних променів</text>
+	</string>
+	<string id="ui_mm_r2_lens_flare">
+		<text>Відблиски від ламп</text>
+	</string>
+	<string id="ui_mm_r2_lens_dirt">
+		<text>Бруд на лінзі</text>
+	</string>
+	<string id="ui_mm_r2_puddles">
+		<text>Калюжі</text>
+	</string>
+	<string id="ui_mm_r2_wet_surfaces">
+		<text>Намокання</text>
+	</string>
+	<string id="ui_mm_r2_reflections">
+		<text>Відбиття</text>
+	</string>
+	<string id="ui_mm_r2_reflections_mode">
+		<text>Режим відбиття</text>
+	</string>
+	<string id="ui_mm_r2_details_opt">
+		<text>Оптимізація трави</text>
+	</string>
+	<string id="ui_mm_r2_gbuffer_opt">
+		<text>Оптимізація шейдерів</text>
+	</string>
+	<string id="ui_mm_r2_image_sharpening">
+		<text>Чіткість зображення</text>
+	</string>
+	<string id="screen_space">
+		<text>Crysis</text>
+	</string>
+	<string id="volumetric">
+		<text>S.T.A.L.K.E.R. Чисте Небо</text>
+	</string>
+	<string id="ui_load_press_any_key_to_start">
+		<text>Натисніть будь-яку клавішу для переходу до гри</text>
+	</string>
+	<string id="ui_mm_r2_lights_shadow_fade">
+		<text>М'які тіні ламп</text>
+	</string>	
 </string_table>

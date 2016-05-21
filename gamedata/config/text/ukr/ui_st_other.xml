@@ -18,11 +18,14 @@
 	<string id="ui_mm_detail_density">
 		<text>Щільність трави</text>
 	</string>
+	<string id="ui_mm_detail_distance">
+		<text>Дальність промальовування трави</text>
+	</string>	
 	<string id="ui_mm_r2_sun">
 		<text>Тінь від сонця</text>
 	</string>
 	<string id="ui_mm_r2_sun_details">
-		<text>Тінь трави</text>
+		<text>Тінь від трави</text>
 	</string>
 	<string id="ui_mm_render_2">
 		<text>Рендер-2</text>
@@ -234,4 +237,114 @@
 	<string id="ui_st_invalid_saved_game">
 		<text>Не співпадає версія збереженої гри або збережена гра пошкоджена.</text>
 	</string>
+	<string id="ui_remkit_out_of_item">
+		<text>В інвентарі немає відповідних предметів для розбору на запчастини.</text>
+	</string>
+	<string id="ui_remkit_select_item">
+		<text>Виберіть зі списку предмет для розбору на запчастини.</text>
+	</string>
+	<string id="ui_remkit_invalid_item">
+		<text>Нічого не вийде - річ розбита в мотлох. Виберіть річ в кращому стані.</text>
+	</string>
+	<string id="ui_remkit_item_not_repaireble">
+		<text>Предмет не піддається ремонту або його вже неможливо полагодити.</text>
+	</string>
+	<string id="ui_remkit_item_not_wanted">
+		<text>Предмет не потребує ремонту.</text>
+	</string>
+	<string id="ui_remkit_repair_success">
+		<text>Вам вдалося поліпшити стан предмета.</text>
+	</string>
+	<string id="ui_remkit_repair_without_changes">
+		<text>Ви не змогли поліпшити стан предмета.</text>
+	</string>
+	<string id="ui_remkit_repair_failure">
+		<text>Через недосвідченість Ви погіршили стан предмета.</text>
+	</string>
+	<string id="ui_repair_success">
+		<text>Предмет був успішно відремонтований.</text>
+	</string>	
+	<string id="ui_remkit_repair_nomoney">
+		<text>У вас не вистачає грошей для ремонту цієї речі.</text>
+	</string>
+	<string id="ui_repair_select_item">
+		<text>Виберіть зі списку предмет для ремонту.</text>
+	</string>
+	
+	<string id="ui_mm_r2_sun_shafts">
+		<text>Сонячні промені</text>
+	</string>
+
+	<string id="ui_mm_r2_soft_water">
+		<text>М'які краї води</text>
+	</string>	
+	
+	<string id="ui_mm_r2_soft_particles">
+		<text>М'які ефекти частинок</text>
+	</string>		
+	
+	<string id="ui_mm_r__bloodmarks">
+		<text>Сліди попадань куль</text>
+	</string>		
+	
+	<string id="ui_mm_r2_volumetric_fog">
+		<text>Об'ємний туман</text>
+	</string>
+	
+	<string id="ui_mm_r2_soft_shadows">
+		<text>М'які краї тіней</text>
+	</string>
+	
+		<string id="ui_mm_r2_ssao_base">
+		<text>Глобальне освітлення</text>
+	</string>	
+	
+	<string id="ui_mm_r2_ssao_mode">
+		<text>Режим глобального освітлення</text>
+	</string>	
+
+	<string id="ui_mm_r2_ssao">
+		<text>Якість глобального освітлення</text>
+	</string>		
+	
+	
+	<string id="ui_mm_r2_float32">
+		<text>Освітлення Кука-Торенса</text>
+	</string>
+	
+	<string id="ui_mm_r2_steep_parallax">
+		<text>Покращена рельєфність поверхонь</text>
+	</string>	
+	
+	<string id="ui_mm_r2_dof">
+		<text>Динамічна глибина поля зору</text>
+	</string>	
+	
+	<string id="ui_mm_r2_volumetric_lights">
+		<text>Об'ємне світло</text>
+	</string>		
+		
+	<string id="ui_mm_r2_true_sun_shadows">
+		<text>Правильні тіні</text>
+	</string>	
+	
+	<string id="ui_mm_r2_ao">
+		<text>Ambient Occlusion (Затінення оточення)</text>
+	</string>		
+		
+	<string id="ui_mm_r2_ao_intensity">
+		<text>Інтенсивність AO</text>
+	</string>	
+	
+	<string id="hint_name_text">
+		<text>Опис налаштувань</text>
+	</string>
+	
+	<string id="hint_caption_text">
+		<text>Натисніть кнопку 'Розширені', щоб змінити налаштування, додані модом OGSE</text>
+	</string>	
+	
+	<string id="hint_caption_adv_text">
+		<text>Наведіть курсор миші на опцію і побачите тут її опис. Таким чином ви зможете зрозуміти сенс незнайомих вам налаштувань, а також нових налаштувань, доданих модом OGSE.</text>
+	</string>	
 </string_table>

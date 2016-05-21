@@ -1418,7 +1418,7 @@ function start(first_speaker, second_speaker)
 	dialogs.relocate_item_section(trader, "glushitel", "out")	
 	local gtime = amk.game_minutes()
 	amk.save_variable("glushitel_reload", gtime + 300)
-	clear_glushitel(actor)
+--	clear_glushitel(actor)
 end
 
 function is_reload_ready(first_speaker, second_speaker)
@@ -1483,41 +1483,29 @@ end
 
 
 function set_xalyava()
-local obj
-for a=1,65534 do
-   obj = alife():object(a) 
-       if obj then
-          if obj and obj:name() == "esc_xalyava" then 
+  local obj = alife():object( "esc_xalyava" )
+  if obj then
             amk.add_spot_on_map(obj.id,"crlc_big","Місце угоди") 
-			break
-		  end
-       end
-   end
+  end
 end
+
 
 -- Нейтралим наймов с военными, чтобы не мешали
 function begin_xalyava()
-	local obj
 	for a=1,8 do
-		obj = alife():object("xalyava_naem"..a)
+		local obj = alife():object("xalyava_naem"..a)
 		if obj then
 			relation_registry.set_community_goodwill("military", obj.id, 5000)
-			get_console():execute("load ~~~ name: "..obj:name())
 		end
 	end
 end
 
+
 function remove_xalyava()
-local obj
-for a=1,65534 do
-  obj = alife():object(a)
-      if obj then
-        if obj and obj:name() == "esc_xalyava" then 
-           level.map_remove_object_spot(obj.id,"crlc_big")
-           break
-        end
-      end
-   end
+  local obj = alife():object( "esc_xalyava" )
+  if obj then
+    level.map_remove_object_spot( obj.id, "crlc_big" )
+  end
 end
 
 
@@ -2080,9 +2068,16 @@ news_manager.send_tip(db.actor,"%c[255,160,160,160]".."СИДОРОВИЧ:".."\\n".."%c[2
 db.actor:give_info_portion("mitya_dead_sms_sidor")
 end
 
+
 function spawn_green()
-local obj = alife():create("green_ruk",vector():set(228.335338,-7.298178,67.8218),143611,3319)
+  dsh.create_and_map_treasure(
+    "Документи для Клика",
+    "...йди весь час прямо повз багаття, до танка, ось біля нього і пошукай рюкзак, документи у ньому.",
+    "green_ruk",
+    vector():set( 228.335338, -7.298178, 67.8218 ), 143611, 3319
+  )
 end
+
 
 function clear_actor(npc)
     local npc = db.actor
@@ -2292,9 +2287,17 @@ level_new.create_level_changer(18112, vector():set(-45.602458953857,18.978830337
         end
 end
 
+
 function BitvaKL_rukzak() 
-	local obj = alife():create("bitvakl_ruk",vector():set(201.8493347168,-2.1620719432831,-79.324325561523),129996,3316)
+  dsh.create_and_map_treasure(
+    "Тайник досвідченого сталкера",
+    "Наші всі знають, де він лежить, але ніхто не наважився його взяти. Тому, що головна складність - залишитися в живих. Якщо хочеш - можеш спробувати. Він десь недалеко від аномалії, що в лісі.",
+    "bitvakl_ruk",
+    vector():set( 201.8493347168, -2.1620719432831, -79.324325561523 ),
+    129996, 3316
+  )
 end
+
 
 function checking_taken_item60(obj)
   if obj:section()=="bitvakl_pda" then 

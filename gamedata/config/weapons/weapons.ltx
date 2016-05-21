@@ -104,7 +104,7 @@ gravity_const					= 9.81
 air_resistance_k				= 1.82
 
 ;размер шага времени (в милисекундах), по которому проигрываются 
-time_step						= 33
+time_step						= 1 ;33
 ;минимальная скорость (м/с), на которой пуля еще считается и показывается
 min_bullet_speed				= 0.3
 ;cколько процентов энергии потеряет пуля при столкновении с материалом (при падении под прямым углом)
@@ -112,9 +112,7 @@ collision_energy_min			= 0.7 ;0.80 ;0.75; 0.90
 ;сколько процентов энергии останется у пули при любом столкновении
 collision_energy_max			= 0.6 ;0.5 ;0.7;0.50
 
-whine_sounds					= weapons\whine_1, weapons\whine_2, weapons\whine_3, weapons\whine_4, weapons\whine_5,
-                                                   weapons\whine_6, weapons\whine_7, weapons\whine_8, weapons\whine_9, weapons\whine_10, 
-                                                   weapons\whine_11, weapons\whine_12, weapons\whine_13, weapons\whine01, weapons\whine02
+whine_sounds					= weapons\whine_1, weapons\whine_2, weapons\whine_3, weapons\whine_4, weapons\whine01, weapons\whine02
 explode_particles				= amk\flame ;explosions\expl_bullet,explosions\expl_bullet_00,explosions\expl_bullet_01
 
 
@@ -130,7 +128,7 @@ color_4 = 0.3, 1.0, 0.3 ; blue
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_base]:identity_immunities
 ;belt				= false
-tracer			= on
+tracer			= off
 tracer_color_ID		= 0
 explosive		= off
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -181,6 +179,7 @@ buck_shot		= 1
 tracer			= off
 wm_size         = 0.07
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон  9х18 ПБМ
@@ -222,9 +221,10 @@ k_impulse		= 1.2
 k_pierce		= 2
 impair			= 1
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.07
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон  9х18 ПММ (7Н16)  
@@ -269,6 +269,7 @@ buck_shot		= 1
 tracer			= off
 wm_size         = 0.07
 tracer_color_ID		= 4
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;; Боеприпасы для МП5, МП7, Вальтер П38, Вальтер П99, Беретта М92, Браунинг ХП-СА, ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон  9х19 НАТО (9мм +Р+)
@@ -313,6 +314,7 @@ buck_shot		= 1
 wm_size 		= 0.07
 tracer			= off
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон  9х19 М9 
@@ -355,8 +357,9 @@ k_pierce		= 1.25
 impair			= 1
 buck_shot		= 1
 wm_size 		= 0.06
-tracer			= on
+tracer			= off
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   Боеприпасы для шт.винтовок (автоматов)  ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -401,10 +404,11 @@ k_impulse			= 1
 k_pierce			= 1.79
 impair				= 1
 buck_shot			= 1
-tracer				= on
+tracer				= off
 wm_size         	= 0.05
 explosive		= off 
 tracer_color_ID		= 1
+hit_fx_particle		= hit_fx\hit_flesh_01
 
 
 [ammo_5.45x39_izomorf]:ammo_5.45x39_ap
@@ -431,6 +435,7 @@ k_disp		      = 2.1
 k_hit		            = 4.33
 k_impulse			= 5.8
 explosive		      = on
+hit_fx_particle		= hit_fx\hit_flesh_01
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
@@ -477,6 +482,7 @@ tracer				= off
 wm_size         	= 0.05
 explosive		= off 
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_flesh_01
 ;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для семейства (АР)М-16, Сиг-550, Г-36, Л85А2, Famas, Galil, AUG, XM8 ;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 5,56х45мм M995 (.223 Ремингтон)
@@ -518,10 +524,11 @@ k_impulse		= 1
 k_pierce		= 1.79
 impair		= 1
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.05
 explosive	    = off 
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_flesh_01
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 5,56х45мм М855 (.223 Ремингтон)
@@ -563,10 +570,11 @@ k_impulse			= 1.1
 k_pierce			= 1.5
 impair				= 1
 buck_shot			= 1
-tracer				= on
+tracer				= off
 wm_size         	= 0.05
 explosive		= off
 tracer_color_ID		= 1
+hit_fx_particle		= hit_fx\hit_flesh_01
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_5.7x28_fmj]:ammo_base
 GroupControlSection	= spawn_group
@@ -601,6 +609,7 @@ impair		= 1
 buck_shot		= 1
 tracer_color_ID		= 2
 wm_size         = 0.05
+hit_fx_particle		= hit_fx\hit_eagleu
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Боеприпасы для П90 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -636,6 +645,7 @@ impair		= 1.05
 buck_shot		= 1
 tracer_color_ID		= 4
 wm_size         = 0.05
+hit_fx_particle		= hit_fx\hit_eagleu
 
 ;-------------------------------------------
 ;   патрон 5.7x28мм L191
@@ -677,9 +687,10 @@ k_impulse		= 1.95
 k_pierce		= 1.45
 impair		= 1.05
 buck_shot		= 1
-tracer		= on
+tracer		= off
 wm_size         = 0.05
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для единого пулемета ПК(ПКМ) ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 7.62х54мм обр. 1908г. бронебойно-трассирующий (БТ-90)
@@ -701,7 +712,7 @@ visual                  = weapons\pkm\ammo_762x54r_box.ogf
 description				= enc_weapons1_ammo_ammo-7.62x54r
 $prefetch 		= 64
 
-cost			= 1900 ;900
+cost			= 23000
 
 box_size		= 100
 
@@ -723,6 +734,7 @@ impair			= 1
 buck_shot		= 1
 wm_size         = 0.05
 tracer_color_ID		= 1
+hit_fx_particle		= hit_fx\hit_pblow
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для снайперских винтовок  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -771,6 +783,7 @@ tracer			= off
 wm_size         = 0.06
 explosive		= off
 tracer_color_ID		= 0
+hit_fx_particle		= hit_fx\hit_pblow
 
 
 [ammo_7.62x54_foto]:ammo_7.62x54_ap 		
@@ -850,6 +863,7 @@ tracer			= off
 wm_size         = 0.06
 explosive		= off ;on
 tracer_color_ID		= 0
+hit_fx_particle		= hit_fx\hit_pblow
 
 
 [ammo_7.62x54_izomorf]:ammo_7.62x54_7h14 		
@@ -880,10 +894,11 @@ k_impulse		      = 3.8
 k_pierce		      = 3.05
 impair			= 1
 buck_shot		      = 1
-tracer			= on
+tracer			= off
 wm_size            = 0.06
 explosive		 = on
 tracer_color_ID	 = 2
+hit_fx_particle		= hit_fx\hit_pblow
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
@@ -930,6 +945,7 @@ tracer			= off
 wm_size         = 0.06
 explosive		= off
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_pblow
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для спецоружия ВСС "Винторез", АС "Вал", ОЦ-14 "Гроза"  ;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -973,9 +989,10 @@ k_impulse		= 1
 k_pierce		= 1.77
 impair			= 1
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.07
 tracer_color_ID		= 4
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон СП-6 9х39мм бронебойный (7Н9)
@@ -1020,6 +1037,7 @@ buck_shot		= 1
 tracer			= off
 wm_size         = 0.07
 tracer_color_ID		= 4
+hit_fx_particle		= hit_fx\hit_eagleu
 
 
 [ammo_9x39_izomorf]:ammo_9x39_ap
@@ -1046,6 +1064,7 @@ k_disp		      = 2.1
 k_hit		            = 8.33
 k_impulse			= 6.8
 explosive		      = on
+hit_fx_particle		= hit_fx\hit_eagleu
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
@@ -1086,12 +1105,13 @@ k_disp			= 2.75
 k_hit			= 3.5
 k_impulse		= 1.5
 k_pierce		= 1.7
-impair			= 8
+impair			= 4 ;8
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.07
 explosive		= off
 tracer_color_ID		= 4
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для электромагнитного оружия  ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1130,6 +1150,7 @@ tracer			= off
 wm_size         = 0.02
 explosive		= off
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_gauss
 ;;;;;;;;;;;;;;;;;;;; Боеприпасы для Гаусс-пистолета ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_super_gauss]:ammo_gauss
 description		= enc_weapons1_ammo_super_gauss
@@ -1141,6 +1162,7 @@ inv_weight		= .5
 k_dist			= 1.0
 k_hit			= 20
 k_impulse		= 0
+hit_fx_particle		= hit_fx\hit_gauss
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;не править! Это для бинокля!
 [ammo_super_gauss1]:ammo_gauss
@@ -1193,7 +1215,7 @@ inv_grid_y			= 12
 
 k_dist			= 1
 k_disp			= 2.2
-k_hit			= 2.35
+k_hit			= 2.62 ;2.35
 k_impulse		= 3.2
 k_pierce		= 1.2
 impair			= 1
@@ -1201,6 +1223,7 @@ buck_shot		= 1
 tracer			= off
 wm_size         = 0.08
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 11,43x23 мм Federal Hydro-Shok (.45 АКП)
@@ -1237,14 +1260,15 @@ inv_grid_y			= 12
 
 k_dist			= 1
 k_disp			= 2.5
-k_hit			= 2.45
+k_hit			= 2.85 ;2.45
 k_impulse		= 3.8
 k_pierce		= 1.29
 impair			= 1
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.08
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для гладкоствольного охотничье-боевого оружия  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1289,10 +1313,11 @@ k_impulse		= 1.2
 k_pierce		= 1.55
 impair			= 1.2
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.05
 explosive		= off
 tracer_color_ID		= 3
+hit_fx_particle		= hit_fx\hit_pkm
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 
@@ -1338,6 +1363,7 @@ tracer			= off
 wm_size         = 0.08
 explosive		= off 
 tracer_color_ID		= 2
+hit_fx_particle		= hit_fx\hit_pkm
 
 [ammo_12x76_zhekan_heli]:ammo_12x76_zhekan
 $spawn			= "weapons\ammo\ammo_12x76_zhekan_heli" ; option for Level Editor
@@ -1370,6 +1396,7 @@ k_hit			= 9.6
 k_impulse		= 3.6
 k_pierce		= 3.07
 explosive		     = on
+script_binding = bind_det_arts.bind_artefact
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 
@@ -1416,6 +1443,7 @@ tracer			= off
 wm_size         = 0.05
 tracer_color_ID		= 1
 fake_grenade_name = wpn_fake_drob
+hit_fx_particle		= hit_fx\hit_pkm
 ;-------------------------------------------
 
 ;Патроны 12х70 "Картечь"
@@ -1449,10 +1477,11 @@ k_impulse		= 0.7
 k_pierce		= 1.29
 impair			= 1.2
 buck_shot		= 12
-tracer			= on
+tracer			= off
 wm_size			= 0.06
 explosive		= off
 fake_grenade_name = wpn_fake_drob
+hit_fx_particle		= hit_fx\hit_pkm
 ;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для семейства АК серий 47 ;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 7.62х39мм обр.1943г (8ПО)
@@ -1497,6 +1526,7 @@ buck_shot		= 1
 tracer			= off
 wm_size         = 0.06
 tracer_color_ID		= 1
+hit_fx_particle		= hit_fx\hit_flesh_01
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон 7.62х39мм ПС обр.1943г (57-Н-231С)
@@ -1538,9 +1568,10 @@ k_impulse		= 1.2
 k_pierce		= 2.25 
 impair			= 1
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.06
 tracer_color_ID		= 0
+hit_fx_particle		= hit_fx\hit_flesh_01
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_og-7b]:ammo_base
 GroupControlSection	= spawn_group
@@ -1574,6 +1605,7 @@ impair			= 1.15
 buck_shot		= 0
 tracer_color_ID		= 4
 wm_size         = 0.1
+hit_fx_particle		= hit_fx\hit_expl
 
 ;могут ли боеприпасы быть неограниченными : 1 - могут, 0 - не могут
 can_be_unlimited = true ;false
@@ -2520,6 +2552,8 @@ inv_grid_x			= 18
 inv_grid_y			= 2
 scope_texture		= wpn\wpn_crosshair
 scope_zoom_factor	      = 20		;4.26666	;4.5	;Kahles CSX 1.1-4x24, 2x
+belt = true
+scope_sights_lighting	= wpn\wpn_crosshair_light
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [wpn_addon_scope_susat]:identity_immunities
@@ -2548,6 +2582,7 @@ inv_grid_x			= 19
 inv_grid_y			= 1
 scope_texture		= wpn\SUSAT-AMK-N
 scope_zoom_factor	= 20		;4.27	;4.5	;30		;SUSAT 2X 
+belt = true
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [wpn_addon_silencer]:identity_immunities
@@ -2744,6 +2779,7 @@ impair			= 1
 buck_shot		= 1
 tracer			= off
 wm_size         = 0.05
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------
 ;   патрон  7.62х25 ПС (57-Т-133)
@@ -2786,8 +2822,9 @@ k_impulse		= 0.95
 k_pierce		= 1.35
 impair		= 1
 buck_shot		= 1
-tracer		= on
+tracer		= off
 wm_size         = 0.05
+hit_fx_particle		= hit_fx\hit_eagleu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  Боеприпасы для метательного оружия  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2899,7 +2936,7 @@ k_impulse		= 100
 k_pierce		= 0.52
 impair		= 3
 buck_shot		= 1
-tracer			= on
+tracer			= off
 wm_size         = 0.015
 
 
@@ -2936,6 +2973,7 @@ impair		= 1
 buck_shot		= 1
 wm_size           = 0.06
 tracer			= off
+hit_fx_particle		= hit_fx\hit_pkm
 
 ; Для снайперки  В-94 и ВССК "Выхлоп"
 [ammo_12.7x108]:ammo_base
@@ -2965,11 +3003,12 @@ k_disp			      = 1
 k_hit			            = 12.6
 k_impulse		            = 5.2
 k_pierce		            = 7.15
-tracer			      = on
+tracer			      = off
 wm_size                       = 0.15
 ;explosive		            = on
 impair			      = 1
 buck_shot		            = 1
+hit_fx_particle		= hit_fx\hit_gauss
 
 ;------------------------------патрон для фотика Хабарыч------------------------------------------
 [ammo_foto]:ammo_base 		
@@ -3132,6 +3171,7 @@ frag_hit_impulse	= 3
 hit_type_blast		= explosion
 hit_type_frag		= fire_wound
 time_to_explode			= 0.1f
+script_binding = dsh_babah_proxy.bind_mine
 
 [bomba_mina_b]:bomba_big
 inv_name			= "Посилена протипіхотна міна"
@@ -3154,6 +3194,7 @@ frag_hit_impulse	= 3
 hit_type_blast		= explosion
 hit_type_frag		= fire_wound
 time_to_explode			= 0.1f
+script_binding = dsh_babah_proxy.bind_mine
 
 [bomba_timer_n_10_base]:bomba
 inv_name			= "Вибухівка з таймером"
@@ -3281,6 +3322,7 @@ inv_grid_x              = 3
 inv_grid_y              = 19
 cost				     = 800
 quest_item			= false
+eat_portions_num 	= 1000000
 
 
 [detonator_2]:playe_r
@@ -3296,6 +3338,7 @@ inv_grid_x              = 25
 inv_grid_y              = 49
 cost				     = 2000
 quest_item			= false
+eat_portions_num 	= 1000000
 
 [ammo_balon]:ammo_base
 GroupControlSection	= spawn_group
@@ -3427,10 +3470,11 @@ GroupControlSection	= spawn_group
 discovery_dependency =
 $spawn 			= "food and drugs\antirad"
 $prefetch 		= 32
-class			= II_ANTIR
+class			= ARTEFACT ;II_ANTIR
 cform           = skeleton
 visual          = equipments\light_night.ogf
 description		= nv_bad_descr
+pnv_discharge_hours = 20
 
 inv_name			= nv_bad
 inv_name_short		= nv_bad
@@ -3441,8 +3485,10 @@ inv_grid_height		= 1
 inv_grid_x			= 60
 inv_grid_y			= 14
 cost				= 2500
-ppe = nightvision_bad			;Эффект прицела - обязательный параметр
-light_amp = 1.5					;Доп усиление света - не обязательно, 1 по умолчанию
+nightvision_sect = effector_nightvision_bad
+slot			= 11
+jump_height		= 0
+lights_enabled  = false
 
 ; eatable item
 eat_health = 0
@@ -3450,15 +3496,47 @@ eat_satiety = 0
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
-eat_portions_num = 1
+eat_portions_num 	= 1000000
 
 ; food item
-animation_slot		= 4
+animation_slot		= 11 ;4
 belt				= false
 default_to_ruck		= false
 
 ;hud item
-hud = wpn_vodka_hud
+hud = nv_bad_hud
+allow_inertion				= true
+attach_angle_offset			= 0,0,0
+attach_position_offset		= -0.1,-0.1,0
+attach_bone_name			= bip01_root
+;скорости увеличения (уменьшения) 
+health_restore_speed = 0.0			
+radiation_restore_speed = 0.0
+satiety_restore_speed = 0.0
+power_restore_speed = 0.0
+bleeding_restore_speed = 0.0
+hit_absorbation_sect = nv_bad_absorbation
+
+[nv_bad_absorbation];коэффициенты иммунитета 
+burn_immunity = 1.0				
+strike_immunity = 1.0
+shock_immunity = 1.0
+wound_immunity = 1.0		
+radiation_immunity = 1.0
+telepatic_immunity = 1.0
+chemical_burn_immunity = 1.0
+explosion_immunity = 1.0
+fire_wound_immunity  = 1.0
+
+[nv_bad_hud]
+orientation             	= 0, 0, 0		
+position                	= 0, 0, 0
+visual                  	= weapons\artefact\wpn_artefact_hud.ogf
+anim_idle					= idle
+anim_idle_sprint			= idle_sprint
+anim_hide					= holster
+anim_show					= draw
+anim_activate				= activate
 
 [nv_good]:nv_bad
 description		= nv_good_descr
@@ -3470,8 +3548,8 @@ inv_grid_height		= 2
 inv_grid_x			= 60
 inv_grid_y			= 12
 cost				= 12500
-ppe = nightvision_good			;Эффект прицела - обязательный параметр
-light_amp = 2.5					;Доп усиление света - не обязательно, 1 по умолчанию
+nightvision_sect = effector_nightvision_good
+pnv_discharge_hours = 12
 
 [nv_bast]:nv_bad
 description		= nv_bast_descr
@@ -3483,7 +3561,7 @@ inv_grid_height		= 2
 inv_grid_x			= 62
 inv_grid_y			= 12
 cost				= 45000
-ppe = bast						;Эффект прицела - обязательный параметр
-light_amp = 3.0					;Доп усиление света - не обязательно, 1 по умолчанию
+nightvision_sect = effector_nightvision_bast
+pnv_discharge_hours = 8
 
 ;------------------------------end------------------------------------------

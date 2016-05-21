@@ -890,43 +890,52 @@ comments_templates = {
 	}
 }
 
+
 smart_filters = {
-	["military"] = {"esc_bridge", "esc_blokpost", "agr_nii", "agr_factory_hold"},
-	["bandit"] = {"gar_bandit_agr", "val_lager_bandits"},
-	["killer"] = {"mil_mercs"},
-	["zombied"] = {"yantar_zombies", "yan_st_zombie1", "yan_st_zombie2", "yan_st_zombie3", "yan_st_zombie4", "rad_zombied1", "rad_zombied2", "rad_before_tramplin_ambush"},
-	["zombie"] = {"yantar_zombies"},
-	["dog"] = {"esc_boars_dogs"},
-	["boar"] = {"esc_boars_dogs"},
-	["flesh"] = {"esc_flesh_1", "esc_flesh_2"},
-	["arena_enemy"] = {"bar_arena_monstr"},
-	["arena_monstr"] = {"bar_arena_monstr"}
+  [ "military"     ] = {
+    "esc_bridge", "esc_blokpost", "amk_embankment", "agr_nii",
+  },
+  [ "bandit"       ] = { "gar_bandit_agr", "val_lager_bandits", },
+  [ "killer"       ] = { "mil_mercs" },
+  [ "zombied"      ] = {
+    "yantar_zombies", "yan_st_zombie1", "yan_st_zombie2", "yan_st_zombie3",
+    "yan_st_zombie4", "rad_zombied1", "rad_zombied2",
+    "rad_before_tramplin_ambush",
+  },
+  [ "zombie"       ] = { "yantar_zombies" },
+  [ "dog"          ] = { "esc_boars_dogs" },
+  [ "boar"         ] = { "esc_boars_dogs" },
+  [ "flesh"        ] = { "esc_flesh_1", "esc_flesh_2" },
+  [ "arena_enemy"  ] = { "bar_arena_monstr" },
+  [ "arena_monstr" ] = { "bar_arena_monstr" },
 }
 
+
 miniquest_rewards = {
-	["novice"] = {
-		"ammo_9x18_fmj","ammo_9x18_pmm","ammo_12x70_buck","ammo_9x19_fmj","ammo_9x19_pbp","ammo_11.43x23_hydro","ammo_12x76_zhekan","ammo_11.43x23_fmj",
-		"af_vyvert","af_medusa","af_gravi","af_blood","af_fireball","af_ameba_mica","af_cristall_flower", "af_soul", "wpn_mp5_m2","wpn_ak74u", 
-		"treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
-	},
-	["experienced"] = {
-		"ammo_7.62x54_7h1", "ammo_7.62x54_ap", "ammo_7.62x54_7h14","ammo_5.45x39_fmj","ammo_5.45x39_ap","ammo_5.56x45_ss190","ammo_5.56x45_ap","ammo_vog-25p","ammo_vog-25","ammo_m209",
-		"af_cry_1", "af_ameba_slime","af_ameba_slug","af_drops","af_mincer_meat","af_fuzz_kolobok","af_electra_sparkler","af_rusty_thorn","af_rusty_kristall","af_dummy_glassbeads",
-		"wpn_mp5_m2","wpn_addon_silencer","wpn_addon_scope","wpn_addon_grenade_launcher", 
-		"treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
-	},
-	["veteran"] = {
-		"wpn_addon_scope_susat","wpn_addon_grenade_launcher_m203", "wpn_winchester_m1",
-		"ammo_12x76_dart","ammo_9x39_pab9","ammo_9x39_ap","ammo_9x39_sp5","ammo_og-7b","ammo_vog-25p",
-		"af_babka_1", "af_pudd_1", "af_dik_1", "af_kol_1", "af_armor_1", "af_dummy_pellicle","af_rusty_sea-urchin","af_electra_flash","af_soul","af_dummy_spring","af_gold_fish","af_dummy_battery","af_dummy_dummy", 
-		"treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
-	},
-	["master"] = {
-		"af_spirit_2", "af_cry_2", "af_babka_2", "af_pudd_2", "af_dik_2", "af_kol_2", "af_armor_2", "af_cristall","af_dummy_glassbeads","af_night_star","af_electra_moonlight", "af_dummy_pellicle","af_dummy_battery", "af_dummy_dummy", "af_ameba_mica", "af_dummy_spring","af_spirit_1",
-		"ammo_7.62x54_7h1","ammo_7.62x54_ap","ammo_7.62x54_7h14","ammo_gauss",
-		"treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"		
-	}
+  [ "novice" ] = {
+    "ammo_9x18_fmj","ammo_9x18_pmm","ammo_12x70_buck","ammo_9x19_fmj","ammo_9x19_pbp","ammo_11.43x23_hydro","ammo_12x76_zhekan","ammo_11.43x23_fmj",
+    "af_vyvert","af_medusa","af_gravi","af_blood","af_fireball","af_ameba_mica","af_cristall_flower", "af_soul", "wpn_mp5_m2","wpn_ak74u", 
+    "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
+  },
+  [ "experienced" ] = {
+    "ammo_7.62x54_7h1", "ammo_7.62x54_ap", "ammo_7.62x54_7h14","ammo_5.45x39_fmj","ammo_5.45x39_ap","ammo_5.56x45_ss190","ammo_5.56x45_ap","ammo_vog-25p","ammo_vog-25","ammo_m209",
+    "af_cry_1", "af_ameba_slime","af_ameba_slug","af_drops","af_mincer_meat","af_fuzz_kolobok","af_electra_sparkler","af_rusty_thorn","af_rusty_kristall","af_dummy_glassbeads",
+    "wpn_mp5_m2","wpn_addon_silencer","wpn_addon_scope","wpn_addon_grenade_launcher", 
+    "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
+  },
+  [ "veteran" ] = {
+    "wpn_addon_scope_susat","wpn_addon_grenade_launcher_m203", "wpn_winchester_m1",
+    "ammo_12x76_dart","ammo_9x39_pab9","ammo_9x39_ap","ammo_9x39_sp5","ammo_og-7b","ammo_vog-25p",
+    "af_babka_1", "af_pudd_1", "af_dik_1", "af_kol_1", "af_armor_1", "af_dummy_pellicle","af_rusty_sea-urchin","af_electra_flash","af_soul","af_dummy_spring","af_gold_fish","af_dummy_battery","af_dummy_dummy", 
+    "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"
+  },
+  [ "master" ] = {
+    "af_spirit_2", "af_cry_2", "af_babka_2", "af_pudd_2", "af_dik_2", "af_kol_2", "af_armor_2", "af_cristall","af_dummy_glassbeads","af_night_star","af_electra_moonlight", "af_dummy_pellicle","af_dummy_battery", "af_dummy_dummy", "af_ameba_mica", "af_dummy_spring","af_spirit_1",
+    "ammo_7.62x54_7h1","ammo_7.62x54_ap","ammo_7.62x54_7h14","ammo_gauss","ammo_12x70_buck","ammo_11.43x23_hydro","ammo_12x76_zhekan","ammo_11.43x23_fmj","ammo_5.56x45_ss190","ammo_5.56x45_ap","ammo_vog-25p","ammo_vog-25","ammo_m209","ammo_12x76_dart","ammo_9x39_ap","ammo_9x39_sp5","ammo_og-7b",
+    "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item", "treasure_item"		
+  }
 }
+
 
 class_templates = {
 	["stalker_novice"] = {"gar_stalker_respawn_1", "esc_stalker_respawn_1", "ds_stalker_respawn_1", "bar_stalker_respawn_3"},
@@ -969,11 +978,11 @@ class_templates = {
 do_seen_monster_templates = {
 	{	enabled = true, text ="Тільки що близько покинутої ферми на Кордоні знайшли закривавлений труп. Схоже на роботу кровососа.",
 		spawn = {
-			{class = "bloodsucker_weak", count = 1, point = {-2.46, 2.58, 83.14}, lv = 273930 , gv = 85 }
+			{class = "bloodsucker_weak", count = 1, point = {-29.88076210022,2.3805351257324,83.740310668945}, lv = 246822 , gv = 86 }
 		},
 		reward = {from = "author", r_type="money", c_min = 10, c_max = 50}
 	},		
-	{	enabled = true, text ="Ох, ці тушканчики! Заманали! Знову в табір новачків як лайна набігло, так що хто боїться гризунів, то покищо до нас не лізьте.",
+	{	enabled = false, text ="Ох, ці тушканчики! Заманали! Знову в табір новачків як лайна набігло, так що хто боїться гризунів, то покищо до нас не лізьте.",
 		spawn = {
 			{class = "tushkano_normal", count = 6, point = {-221.00, -19.93, -158.54}, lv =32809, gv =47}
 		},

@@ -1,3 +1,4 @@
+-- -*- mode: lua; coding: windows-1251-dos -*-
 ---------------------------------------------------------------------
 -- Привет от Сяка 
 ---------------------------------------------------------------------
@@ -293,9 +294,23 @@ alife():create("decoder1",vector():set(-60.656967163086,19.434055328369,-16.2327
 akill.x16_mutant_spawn()
 end
 -- Akill end
-function add_gauss()
-amk.spawn_item("wpn_gungauss",vector():set(-126.11,0.91,-533.55),836,31356) --Гаусс-пистолет  в ТД
+
+
+function add_gauss() --Гаусс-пистолет  в ТД
+  local sobj = alife():object( "val_rob_leader" )
+  if sobj then
+    alife():create(
+      "wpn_gungauss",
+      sobj.position, sobj.m_level_vertex_id, sobj.m_game_vertex_id, sobj.id
+    )
+  else
+    amk.spawn_item(
+      "wpn_gungauss", vector():set( -126.11, 0.91, -533.55 ), 836, 31356
+    )
+  end
 end
+
+
 --function add_medusa_green()
 --amk.spawn_item("af_medusa_green",vector():set(260.59,-9.82,-135),404,373051) --Изумрудная медуза на свалке
 --end
@@ -312,16 +327,16 @@ function add_blood_green()
 	amk.spawn_item("af_blood_green",vector():set(55.34,1.27,40.89),1511,68094) --Изумрудная кровь на Янтаре 
 	alife():create("yan_zombied_respawn_1",vector():set(75.406539916992,0.34422329068184,23.229085922241),79415,1512)
 	alife():create("yan_zombied_respawn_2",vector():set(41.926971435547,0.037857890129089,20.751808166504),60400,1445)
-	alife():create("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
-	alife():create("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
-	alife():create("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
-	alife():create("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
-	alife():create("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
-	alife():create("m_poltergeist_dd",vector():set(58.236850738525,-0.84842598438263,-20.68497467041),69709,1508)
-	alife():create("electro_polter",vector():set(56.451206207275,0.046565324068069,-60.764457702637),68827,1516)
-	alife():create("polter_xray",vector():set(27.053871154785,0.084938794374466,-9.735237121582),52620,1507)
-	alife():create("controller_flame",vector():set(90.896003723145,0.028825730085373,12.075715065002),87194,1513)
-	alife():create("m_controller_act",vector():set(15.076522827148,0.030788093805313,19.65348815918),46805,1445)
+	dsh.create_free_monster("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
+	dsh.create_free_monster("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
+	dsh.create_free_monster("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
+	dsh.create_free_monster("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
+	dsh.create_free_monster("spider",vector():set(106.78483581543,-8.8652667999268,-212.50025939941),96215,1472)
+	dsh.create_free_monster("m_poltergeist_dd",vector():set(58.236850738525,-0.84842598438263,-20.68497467041),69709,1508)
+	dsh.create_free_monster("electro_polter",vector():set(56.451206207275,0.046565324068069,-60.764457702637),68827,1516)
+	dsh.create_free_monster("polter_xray",vector():set(27.053871154785,0.084938794374466,-9.735237121582),52620,1507)
+	dsh.create_free_monster("controller_flame",vector():set(90.896003723145,0.028825730085373,12.075715065002),87194,1513)
+	dsh.create_free_monster("m_controller_act",vector():set(15.076522827148,0.030788093805313,19.65348815918),46805,1445)
 end
 function add_battery_red()
 amk.spawn_item("af_dummy_battery_red",vector():set(668.9,-45.79,-39.93),1896,227187) --Рубиновая батарейка на Радаре 
@@ -376,14 +391,14 @@ end
 function add_kontainer()
 --	amk.spawn_item("inventory_sakbox_05",vector():set(378,-52,-179.20),2097,101537)
 	alife():create("inventory_sakbox_05",vector():set(467.15960693359,-48.180206298828,-294.86013793945),155265,2063)
-	alife():create("chimera_black",vector():set(486.33248901367,-48.54475402832,-236.83911132813),160400,2058)
-	alife():create("zombie_beee",vector():set(544.77508544922,-50.461318969727,-251.75929260254),187962,2114)
-	alife():create("zombie_blow",vector():set(545.21411132813,-57.409252166748,-226.63201904297),188356,1873)
-	alife():create("zombie_hell",vector():set(568.07763671875,-60.318313598633,-221.79908752441),199631,1873)
-	alife():create("bear",vector():set(514.51159667969,-50.558048248291,-283.08618164063),172856,2060)
-	alife():create("chimera_weak",vector():set(478.98034667969,-54.138397216797,-254.24066162109),157244,2111)
-	alife():create("controller_senator",vector():set(543.19293212891,-53.148582458496,-239.98249816895),187241,2114)
-	alife():create("controller_babka",vector():set(563.63739013672,-62.943653106689,-199.03614807129),197039,1884)
+	dsh.create_free_monster("chimera_black",vector():set(486.33248901367,-48.54475402832,-236.83911132813),160400,2058)
+	dsh.create_free_monster("zombie_beee",vector():set(544.77508544922,-50.461318969727,-251.75929260254),187962,2114)
+	dsh.create_free_monster("zombie_blow",vector():set(545.21411132813,-57.409252166748,-226.63201904297),188356,1873)
+	dsh.create_free_monster("zombie_hell",vector():set(568.07763671875,-60.318313598633,-221.79908752441),199631,1873)
+	dsh.create_free_monster("bear",vector():set(514.51159667969,-50.558048248291,-283.08618164063),172856,2060)
+	dsh.create_free_monster("chimera_weak",vector():set(478.98034667969,-54.138397216797,-254.24066162109),157244,2111)
+	dsh.create_free_monster("controller_senator",vector():set(543.19293212891,-53.148582458496,-239.98249816895),187241,2114)
+	dsh.create_free_monster("controller_babka",vector():set(563.63739013672,-62.943653106689,-199.03614807129),197039,1884)
 end
 function agroprom_wpm()
 local obj = alife():story_object(9115)
@@ -542,7 +557,7 @@ function check_used_item(obj)
 --[[if db.actor==nil or obj==nil then
 	return
 end]]
-arc_main.get_item(obj)
+-- arc_main.get_item(obj)
 local info=nil 
 if level.name()=="l03_agroprom" and obj:section()=="amk_zapiska" then add_new_escape_100() amk.drop_item(db.actor,obj) amk.remove_item(obj) 
 elseif level.name()=="l10_radar" and obj:section()=="rad_document6" then add_new_darkvalley_107() amk.drop_item(db.actor,obj) amk.remove_item(obj) 
@@ -592,7 +607,7 @@ if db.actor==nil then
 	return
 end
 	local actor = db.actor
-arc_main.lose_item(obj)
+-- arc_main.lose_item(obj)
 local info=nil 
 	local v = vector()
 	if level.name()=="l07_military" and
@@ -744,6 +759,7 @@ local nepis = {
 	{story_id = 777888},				-- Шуруп
 	{story_id = 19810},					-- Альфа 2012 (охранник на входе на базу Свободы)
 	{story_id = 724},					-- Кэп (командир Барьера)
+	{story_id = 725, trup = true},  -- Угрюмый из Деревни Кровососов
 	-- ЧАЭС2
 	{story_id = 9969, _umer = true, script = "kostya_dialog.tm_brother_2chaes_spawn()"},	-- Брат Тени Монолита
 	-- Болота
@@ -1101,41 +1117,35 @@ local lev={"l01_escape","l11_pripyat","l07_military","l08_yantar","l12u_sarcofag
 --	show_time()
 --	arc_main.actor_update() -- !!!
 end
+
+
 -- часы---------------ON------------------------
-function show_time()
-	    local hud = get_hud()
-    local cs = hud:GetCustomStatic("hud_show_time")
-	if not bind_stalker.scopeUsed then
-    if cs == nil then
-        hud:AddCustomStatic("hud_show_time", true)
-        cs = hud:GetCustomStatic("hud_show_time")
+function show_time( redraw )
+  local hud = get_hud()
+  local cs  = hud:GetCustomStatic( "hud_show_time" )
+  if redraw == true and cs then
+    hud:RemoveCustomStatic( "hud_show_time" )
+    cs = nil
+  end
+  if not bind_stalker.scopeUsed then
+    if not cs then
+      hud:AddCustomStatic( "hud_show_time", true )
+      cs = hud:GetCustomStatic( "hud_show_time" )
     end
     local time_h = level.get_time_hours()
     local time_m = level.get_time_minutes()
-		local msg = ""..(time_h >= 10 and "" or "0").."%d:"..(time_m >= 10 and "" or "0").."%d\\n"
-			--[[if time_m >= 10 then
-		if time_h>= 10 then
-			msg = string_format("%d:%d\\n", time_h, time_m)
-		else
-			msg = string_format("0%d:%d\\n", time_h, time_m)
-		end
-        else
-		if time_h>= 10 then
-			msg = string_format("%d:0%d\\n", time_h, time_m)
-		else
-			msg = string_format("0%d:0%d\\n", time_h, time_m)
-        end
-			end]]
-    if cs ~= nil then
-			cs:wnd():SetText(string_format(msg, time_h, time_m))
-		end
-	else
-		if cs then
-			hud:RemoveCustomStatic("hud_show_time")
-		end
+    local msg = "" .. ( time_h >= 10 and "" or "0" ) .. "%d:"
+      .. ( time_m >= 10 and "" or "0" ) .. "%d\\n"
+    cs:wnd():SetText( string.format( msg, time_h, time_m ) )
+  else
+    if cs then
+      hud:RemoveCustomStatic( "hud_show_time" )
     end
+  end
 end
 -- часы----------------OFF---------------------------
+
+
 function readvu32u8(packet)
   local v={}
   local len=packet:r_s32()

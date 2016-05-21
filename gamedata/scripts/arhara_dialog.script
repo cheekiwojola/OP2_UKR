@@ -429,11 +429,23 @@ sak.out_item_namber("mutant_burer_hand",1)]]
 dialogs.relocate_item_section(second_speaker, "shaxter_tele","in")
 end
 
+
 --' спавним фонарики
 function fonarik_les()
-local obj = alife():create("fonarik",vector():set(-36.641,0.670,-146.536),158148,2882)
-local obj = alife():create("fonarik",vector():set(-36.641,0.670,-146.536),158148,2882)
+  dsh.create_and_map_treasure(
+    "Знайти два ліхтарика",
+    "Аким сказав, біля одного з упалих вертольотів пошукати. Пів місяця тому він бачив там кілька штук, якраз поруч із шасі валялися.",
+    "fonarik",
+    vector():set( -36.641, 0.670, -146.536 ),
+    158148, 2882
+  )
+  alife():create(
+    "fonarik",
+    vector():set( -36.641, 0.670, -146.536 ),
+    158148, 2882
+  )
 end
+
 
 --' эта функция проверяет наличие 2 фонариков
 function shaxter_fonar_dost_have() 
@@ -446,10 +458,18 @@ function shaxter_fonar_dost_done(first_speaker, second_speaker)
 dialogs.relocate_item_section(second_speaker, "af_part_monolit","in")
 end
 
+
 --' спавним кубик для Акима
 function kubik_spawn()
-local obj = alife():create("kubik",vector():set(-6.754,9.126,-98.030),165824,821)
+  dsh.create_and_map_treasure(
+    "Знайти кубик у Темній Долині",
+    "Аким розповів, що кубик десь на базі бандитів - його один придурок на дах одного з будинків недобудованого комплексу закинув.",
+    "kubik",
+    vector():set( -6.754, 9.126, -98.030 ),
+    165824, 821
+  )
 end
+
 
 --' эта функция проверяет наличие кубика
 function akim_kubik_nayti_have() 
@@ -1337,10 +1357,17 @@ local obj = alife():create("ammo_5.45x39_ap",vector():set(-320.960,64.996,201.00
 local obj = alife():create("ammo_og-7b",vector():set(-320.963,65.005,200.770),34583,2987)
 end
 
+
 --' спавним ключ для удал телепорта на входе базы
 function spawn_kluch_dell_tele()
-local obj = alife():create("kluch_dell_teleport",vector():set(326.871,-6.876,-18.849),1450179,2902)
+  local obj = dsh.create_and_map_treasure(
+    "Знайти ключ",
+    "Сашко Гінеколог сказав: біля одного з каменів і знайдеш ключ. Він схожий на телепортатор і спрацьовує від тепла і біополя людини...",
+    "kluch_dell_teleport",
+    vector():set( 326.871, -6.876, -18.849 ), 1450179, 2902
+  )
 end
+
 
 --' спавним телепорт на входе в базу
 function spawn_teleport_aver_baza_vxod()
@@ -1983,10 +2010,16 @@ function ziklop_sms1()
 news_manager.send_tip(db.actor, "%c[255,160,160,160]".."ЦИКЛОП:".."\\n".."%c[255,255,128,128]Cтрілець, є наводка на схованку, заходь...".."".."\n", nil, nil, 40000, nil, [[characters_voice\human_03\stalker\talk\leave\leave_11]])
 end
 
+
 --' спавним труп контролёра
 function spawn_trupak()
-local obj = alife():create("trupak", vector():set(277.781,-49.943,-110.972),57327,2089)
+  local obj = dsh.create_and_map_treasure(
+    "Дістати труп контролера",
+    "Філін сказав, що пару днів назад, його хлопці тут, біля однєї зі скель, такого контролера якраз завалили, але забрати не змогли - монолітовці налетіли, довелося самим ноги забирати...",
+    "trupak", vector():set( 277.781, -49.943, -110.972 ), 57327, 2089
+  )
 end
+
 
 --' проверим наличие трупа для Филина
 function land_oxot_nayti_have()
@@ -2083,18 +2116,25 @@ local se_obj = alife():object("warlab_kostolom_dead")
   end
 end
 
+
 --' Вступаем в Монолит
-function join_monolith (actor, npc)
-    printf ("ACTOR NOW IN MONOLITH COMMUNITY")
-    if db.actor then
-       db.actor:set_character_community ("monolith", 0, 0)
+function join_monolith()
+  if db.actor then
+    db.actor:set_character_community( "monolith", 0, 0 )
+    local npc      = alife():object( "labirint_shade_monolit" )
+    local goodwill = relation_registry.get_goodwill( npc.id, db.actor:id() )
+    if goodwill < 0 then
+      relation_registry.set_goodwill( npc.id, db.actor:id(), 0 )
     end
+  end
 end
-function checking_taken_item44(obj)
-local info=nil
-if obj:section()=="amulet" then join_monolith(obj)
-   end
+
+function checking_taken_item44( obj )
+  if obj:section() == "amulet" then
+    join_monolith()
+  end
 end
+
 
 --' Вступаем в Наёмники
 function join_killer (actor, npc)
@@ -3898,11 +3938,21 @@ end
 function otkr_perex_zaton_sms1()
 news_manager.send_tip(db.actor, "%c[255,160,160,160]".."СТРІЛЕЦЬ:".."\\n".."%c[255,255,128,128]Ей, Парфумер, наздоганяй... схоже - тут є якийсь телепорт... Зустрінемося після порталу.".."".."\n", nil, nil, 20000, nil, [[characters_voice\ozvuchka\strelok_dcity3]])
 end
+
+
 function otkr_perex_zaton_sms2()
-news_manager.send_tip(db.actor, "%c[255,160,160,160]".."НОРМАН:".."\\n".."%c[255,255,128,128]Ей, мужики! Я з вами! Нічого мені тут більше робити.".."".."\n", nil, nil, 15000)
-amk.start_timer("run", 7, "arhara_dialog.acv_sol()")
-amk.start_timer("run2", 7, "oksana_spawn.akim_panic()")
+  news_manager.send_tip(
+    db.actor,
+    "%c[255,160,160,160]" .. "НОРМАН:" .. "\\n"
+    .. "%c[255,255,128,128]Ей, мужики! Я з вами! Нічого мені тут більше робити." .. "" .. "\n",
+    nil, nil, 15000
+  )
+  amk.start_timer( "run", 7, "arhara_dialog.acv_sol()" )
+  amk.start_timer( "run2", 7, "oksana_spawn.akim_panic()" )
+  dsh.black_doc_exo_start_sms_delayed()
 end
+
+
 function acv_sol()
 db.actor:give_info_portion("acv_sol")
 end
@@ -4357,12 +4407,29 @@ local se_obj = alife():object("zvezd_after_warl")
   end
 end
 
+
 --' спавним тайники с эмбрионами на болотах
 function spawn_embrion_taynik()
-local se_obj = alife():create("m_inventory_box27", vector():set(-210.150,-0.397,392.077),29502,3361)
-local se_obj = alife():create("m_inventory_box28", vector():set(-176.410,0.787,390.441),53178,3361)
-local se_obj = alife():create("m_inventory_box29", vector():set(-216.538,-0.381,385.430),39492,3361)
+  dsh.create_and_map_treasure(
+    "Знайти ембріони мутантів",
+    "...сталк один бувалий зробив на хуторі 3 або 4 схованки, а у схованках - ембріони мутантів...",
+    "m_inventory_box27",
+    vector():set( -210.150, -0.397, 392.077 ), 29502, 3361
+  )
+  dsh.create_and_map_treasure(
+    "Знайти ембріони мутантів",
+    "...сталк один бувалий зробив на хуторі 3 або 4 схованки, а у схованках - ембріони мутантів...",
+    "m_inventory_box28",
+    vector():set( -176.410, 0.787, 390.441 ), 53178, 3361
+  )
+  dsh.create_and_map_treasure(
+    "Знайти ембріони мутантів",
+    "...сталк один бувалий зробив на хуторі 3 або 4 схованки, а у схованках - ембріони мутантів...",
+    "m_inventory_box29",
+    vector():set( -216.538, -0.381, 385.430 ), 39492, 3361
+  )
 end
+
 
 --' проверим наличие эмбрионов
 function boloto_provod_vstrecha_have()
@@ -5487,6 +5554,7 @@ local art_v_buliz_virogdeno_count = 0 -- количество вырожденных артефактов
 --' радар арты пришли в негодность
 function radar_udalyem_art()
     art_v_buliz_virogdeno_count = 0
+    if ui_mm_opt_main.GetOption( "art_degradation" ) then return end
     for a,v in pairs(tabl_art_v_buliz) do
         --если вероятность вырождения "сработала"
         if math_random() < v then
@@ -5554,6 +5622,7 @@ local laba_v_buliz_virogdeno_count = 0 -- количество вырожденных артефактов
 --' х18 арты пришли в негодность
 function laba_dell_art()
     laba_v_buliz_virogdeno_count = 0
+    if ui_mm_opt_main.GetOption( "art_degradation" ) then return end
     for a,v in pairs(tabl_laba_v_buliz) do
         --если вероятность вырождения "сработала"
         if math_random() < v then
